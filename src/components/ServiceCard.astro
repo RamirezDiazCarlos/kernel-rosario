@@ -20,11 +20,10 @@ const cardClasses = `servicio-card ${service.size === "large" ? "large" : ""} an
 const animationDelay = `${0.1 * (index + 1)}s`;
 ---
 
-<div
+<article
   class={cardClasses}
   style={`animation-delay: ${animationDelay}`}
   data-service-id={service.id}
-  role="article"
   aria-labelledby={`service-title-${service.id}`}
 >
   <div class="card-glow" aria-hidden="true"></div>
@@ -54,7 +53,7 @@ const animationDelay = `${0.1 * (index + 1)}s`;
   </div>
 
   <div class="card-border" aria-hidden="true"></div>
-</div>
+</article>
 
 <style>
   /* Card de servicio */
