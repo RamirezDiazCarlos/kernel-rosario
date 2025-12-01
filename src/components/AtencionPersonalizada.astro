@@ -1,0 +1,375 @@
+---
+
+---
+
+<section class="atencion-section">
+  <div class="container">
+    <div class="atencion-wrapper animate-on-scroll">
+      <div class="atencion-content">
+        <div class="badge">
+          <span class="pulse-indicator"></span>
+          <span>Lo que nos diferencia</span>
+        </div>
+
+        <h2 class="atencion-titulo">
+          Atención <span class="gradient-text">personalizada</span>
+        </h2>
+
+        <p class="atencion-descripcion">
+          No sos un número más. Cada equipo es único y cada cliente recibe
+          <strong>atención dedicada de principio a fin</strong>. Entiendo tus
+          necesidades, explico cada paso y te mantengo al tanto del proceso.
+        </p>
+
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            </div>
+            <div>
+              <h4>Compromiso total</h4>
+              <p>
+                Me hago responsable de tu equipo desde el diagnóstico hasta la
+                entrega
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                ></path>
+                <path d="M8 10h.01M12 10h.01M16 10h.01"></path>
+              </svg>
+            </div>
+            <div>
+              <h4>Comunicación clara</h4>
+              <p>
+                Sin tecnicismos innecesarios. Te explico todo de manera simple y
+                directa
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h4>Respuesta rápida</h4>
+              <p>
+                Respondo consultas en menos de 24 horas. Tu tiempo es valioso
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="atencion-visual">
+        <div class="stat-card card-1">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Atención personalizada</div>
+        </div>
+
+        <div class="stat-card card-2">
+          <div class="stat-number">24hs</div>
+          <div class="stat-label">Tiempo de respuesta</div>
+        </div>
+
+        <div class="stat-card card-3">
+          <div class="stat-icon">
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="stat-label">Trato directo con el técnico</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .atencion-section {
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .atencion-section::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.1) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .atencion-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+  }
+
+  .atencion-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    width: fit-content;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .pulse-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .atencion-titulo {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .atencion-descripcion {
+    font-size: 18px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 90%;
+  }
+
+  .atencion-descripcion strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition);
+  }
+
+  .feature-item:hover {
+    border-color: var(--accent);
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .feature-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--accent);
+  }
+
+  .feature-item h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: var(--text-primary);
+  }
+
+  .feature-item p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .atencion-visual {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    position: relative;
+  }
+
+  .stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .stat-card:hover::before {
+    opacity: 1;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .card-1 {
+    grid-column: span 2;
+  }
+
+  .card-3 {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .stat-label {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .stat-icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .atencion-wrapper {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+
+    .atencion-visual {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .atencion-section {
+      padding: 80px 0;
+    }
+
+    .atencion-descripcion {
+      max-width: 100%;
+    }
+
+    .features-list {
+      gap: 16px;
+    }
+
+    .feature-item {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .atencion-visual {
+      grid-template-columns: 1fr;
+    }
+
+    .card-1,
+    .card-3 {
+      grid-column: span 1;
+    }
+  }
+</style>

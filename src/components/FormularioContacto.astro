@@ -1,0 +1,466 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<form
+  class={`form ${className}`}
+  id="contact-form"
+  action="https://formsubmit.co/kernel.tech.rosario@gmail.com"
+  method="POST"
+  novalidate
+>
+  <!-- FormSubmit -->
+  <input
+    type="hidden"
+    name="_subject"
+    value="Nueva consulta desde Kernel Landing"
+  />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_template" value="box" />
+  <input
+    type="hidden"
+    name="_next"
+    value="https://kernel-landing.vercel.app/?success=true"
+  />
+
+  <div class="form-group">
+    <label for="nombre">
+      Nombre completo
+      <span class="required" aria-label="Campo obligatorio">*</span>
+    </label>
+    <input
+      type="text"
+      id="nombre"
+      name="nombre"
+      required
+      minlength="2"
+      maxlength="100"
+      placeholder="Tu nombre"
+      aria-required="true"
+      aria-describedby="nombre-error"
+    />
+    <span class="error-message" id="nombre-error" role="alert"></span>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="email">
+        Email
+        <span class="required" aria-label="Campo obligatorio">*</span>
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        maxlength="100"
+        placeholder="tu@email.com"
+        aria-required="true"
+        aria-describedby="email-error"
+      />
+      <span class="error-message" id="email-error" role="alert"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input
+        type="tel"
+        id="telefono"
+        name="telefono"
+        pattern="[\+]?[0-9\s\-\(\)]{8,20}"
+        maxlength="20"
+        placeholder="+54 9 11 1234-5678"
+        aria-describedby="telefono-error"
+      />
+      <span class="error-message" id="telefono-error" role="alert"></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="servicio">
+      ¿Qué necesitás?
+      <span class="required" aria-label="Campo obligatorio">*</span>
+    </label>
+    <select
+      id="servicio"
+      name="servicio"
+      required
+      aria-required="true"
+      aria-describedby="servicio-error"
+    >
+      <option value="">Seleccioná un servicio</option>
+      <option value="reparacion">Reparación de PC/Notebook</option>
+      <option value="limpieza">Limpieza y mantenimiento</option>
+      <option value="armado">Armado de PC</option>
+      <option value="instalacion">Instalación de sistema</option>
+      <option value="recuperacion">Recuperación de datos</option>
+      <option value="diagnostico">Diagnóstico</option>
+      <option value="otro">Otro</option>
+    </select>
+    <span class="error-message" id="servicio-error" role="alert"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="mensaje">
+      Contanos más sobre el problema
+      <span class="required" aria-label="Campo obligatorio">*</span>
+    </label>
+    <textarea
+      id="mensaje"
+      name="mensaje"
+      rows="4"
+      required
+      minlength="10"
+      maxlength="1000"
+      placeholder="Describí brevemente qué está pasando con tu equipo..."
+      aria-required="true"
+      aria-describedby="mensaje-error"></textarea>
+    <span class="error-message" id="mensaje-error" role="alert"></span>
+  </div>
+
+  <button
+    type="submit"
+    class="submit-btn"
+    aria-label="Enviar formulario de contacto"
+  >
+    <span>Enviar consulta</span>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <line x1="22" x2="11" y1="2" y2="13"></line>
+      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    </svg>
+  </button>
+
+  <div class="form-status" role="status" aria-live="polite"></div>
+</form>
+
+<style>
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .required {
+    color: var(--accent);
+    margin-left: 4px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 14px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-family: inherit;
+    transition: all var(--transition);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--bg-primary);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+  }
+
+  .form-group input:invalid:not(:placeholder-shown),
+  .form-group select:invalid:not(:placeholder-shown),
+  .form-group textarea:invalid:not(:placeholder-shown) {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .error-message {
+    font-size: 13px;
+    color: var(--text-muted);
+    min-height: 18px;
+    display: none;
+    opacity: 0.8;
+  }
+
+  .error-message.active {
+    display: block;
+  }
+
+  .submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--accent);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .submit-btn svg {
+    transition: transform var(--transition);
+  }
+
+  .submit-btn:hover:not(:disabled) svg {
+    transform: translateX(4px);
+  }
+
+  .form-status {
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    text-align: center;
+    display: none;
+  }
+
+  .form-status.success {
+    display: block;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+
+  .form-status.error {
+    display: block;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>
+
+<script>
+  // Verificación SSR
+  if (typeof window !== "undefined") {
+    // Sanitización de inputs
+    const sanitizeInput = (input: string): string => {
+      const div = document.createElement("div");
+      div.textContent = input;
+      return div.innerHTML;
+    };
+
+    // Validación de email
+    const isValidEmail = (email: string): boolean => {
+      const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+      return emailRegex.test(email);
+    };
+
+    // Validación de teléfono
+    const isValidPhone = (phone: string): boolean => {
+      if (!phone) return true;
+      const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,20}$/;
+      return phoneRegex.test(phone);
+    };
+
+    interface FormErrors {
+      [key: string]: string;
+    }
+
+    const initForm = () => {
+      const form = document.getElementById(
+        "contact-form"
+      ) as HTMLFormElement | null;
+      if (!form) return;
+
+      let isSubmitting = false;
+
+      // Cleanup función para event listeners
+      const handleSubmit = async (e: Event) => {
+        e.preventDefault();
+
+        if (isSubmitting) return;
+
+        const errors: FormErrors = {};
+        const formData = new FormData(form);
+        const statusEl = form.querySelector(".form-status");
+        const submitBtn = form.querySelector(
+          ".submit-btn"
+        ) as HTMLButtonElement;
+
+        // Limpiar errores previos
+        form.querySelectorAll(".error-message").forEach((el) => {
+          el.classList.remove("active");
+          el.textContent = "";
+        });
+
+        if (statusEl) {
+          statusEl.classList.remove("success", "error");
+          statusEl.textContent = "";
+        }
+
+        // Validaciones
+        const nombre = ((formData.get("nombre") as string) || "").trim();
+        const email = ((formData.get("email") as string) || "").trim();
+        const telefono = ((formData.get("telefono") as string) || "").trim();
+        const servicio = formData.get("servicio") as string;
+        const mensaje = ((formData.get("mensaje") as string) || "").trim();
+
+        if (!nombre || nombre.length < 2) {
+          errors.nombre = "El nombre debe tener al menos 2 caracteres";
+        }
+
+        if (!email || !isValidEmail(email)) {
+          errors.email = "Ingresá un email válido";
+        }
+
+        if (telefono && !isValidPhone(telefono)) {
+          errors.telefono = "Ingresá un teléfono válido";
+        }
+
+        if (!servicio) {
+          errors.servicio = "Seleccioná un servicio";
+        }
+
+        if (!mensaje || mensaje.length < 10) {
+          errors.mensaje = "El mensaje debe tener al menos 10 caracteres";
+        }
+
+        // Mostrar errores
+        if (Object.keys(errors).length > 0) {
+          Object.entries(errors).forEach(([field, message]) => {
+            const errorEl = document.getElementById(`${field}-error`);
+            if (errorEl) {
+              errorEl.textContent = message;
+              errorEl.classList.add("active");
+            }
+          });
+          return;
+        }
+
+        // Sanitizar datos
+        const sanitizedData = {
+          nombre: sanitizeInput(nombre),
+          email: sanitizeInput(email),
+          telefono: sanitizeInput(telefono),
+          servicio: sanitizeInput(servicio),
+          mensaje: sanitizeInput(mensaje),
+        };
+
+        // Enviar formulario con FormSubmit
+        isSubmitting = true;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = "<span>Enviando...</span>";
+        }
+
+        try {
+          const formDataToSend = new FormData(form);
+
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: formDataToSend,
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          if (response.ok) {
+            if (statusEl) {
+              statusEl.textContent =
+                "¡Mensaje enviado! Te responderemos pronto a tu email.";
+              statusEl.classList.add("success");
+            }
+
+            form.reset();
+
+            statusEl?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          } else {
+            throw new Error("Error en el envío");
+          }
+        } catch (error) {
+          console.error("Error al enviar:", error);
+
+          if (statusEl) {
+            statusEl.textContent =
+              "Hubo un error. Por favor, intentá de nuevo o contactanos por WhatsApp.";
+            statusEl.classList.add("error");
+          }
+        } finally {
+          isSubmitting = false;
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `
+              <span>Enviar consulta</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="22" x2="11" y1="2" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            `;
+          }
+        }
+      };
+
+      form.addEventListener("submit", handleSubmit);
+
+      const cleanup = () => {
+        form.removeEventListener("submit", handleSubmit);
+      };
+
+      window.addEventListener("beforeunload", cleanup);
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initForm);
+    } else {
+      initForm();
+    }
+  }
+</script>

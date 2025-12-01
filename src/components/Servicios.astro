@@ -1,0 +1,158 @@
+---
+import type { Service } from "../types/service.types";
+import { SERVICES_CATALOG } from "../data/services.data";
+import ServiceCard from "./ServiceCard.astro";
+
+// Funcion para obtener los servicios
+const getServices = (): ReadonlyArray<Service> => {
+  // Validar que el catálogo de servicios no esté vacío
+  if (!SERVICES_CATALOG || SERVICES_CATALOG.length === 0) {
+    console.warn("SERVICES_CATALOG is empty or undefined");
+    return [];
+  }
+
+  console.log(`Loaded ${SERVICES_CATALOG.length} services`);
+  return SERVICES_CATALOG;
+};
+
+const servicios = getServices();
+
+// Verificar si hay servicios disponibles
+const hasServices = servicios.length > 0;
+
+if (!hasServices) {
+  console.warn("No services found. Services section will be empty.");
+}
+---
+
+{
+  hasServices ? (
+    <section
+      id="servicios"
+      class="servicios-section"
+      aria-labelledby="servicios-heading"
+    >
+      <div class="container">
+        <header class="section-header animate-on-scroll">
+          <span class="section-tag" aria-label="Sección de">
+            SERVICIOS
+          </span>
+          <h2 id="servicios-heading" class="section-title">
+            Todo lo que tu equipo
+            <br />
+            <span class="gradient-text">necesita</span>
+          </h2>
+        </header>
+
+        <div class="bento-grid" role="list">
+          {servicios.map((servicio, index) => (
+            <ServiceCard service={servicio} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section id="servicios" class="servicios-section servicios-empty">
+      <div class="container">
+        <div class="empty-state">
+          <p class="empty-message">
+            No hay servicios disponibles en este momento.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  /* Main section */
+  .servicios-section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  /* Header de sección */
+  .section-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  /* Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    grid-auto-rows: minmax(220px, auto);
+  }
+
+  /* Empty state */
+  .servicios-empty {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .empty-message {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .servicios-section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .bento-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .empty-state {
+      padding: 40px 20px;
+    }
+  }
+</style>

@@ -1,0 +1,186 @@
+---
+import type { Service } from "../types/service.types";
+
+interface Props {
+  readonly service: Service;
+  readonly index: number;
+}
+
+const { service, index } = Astro.props;
+
+if (!service) {
+  throw new Error("ServiceCard requires a service prop");
+}
+
+if (!service.titulo || !service.descripcion || !service.icon) {
+  throw new Error(`Invalid service data for service ID: ${service.id}`);
+}
+
+const cardClasses = `servicio-card ${service.size === "large" ? "large" : ""} animate-on-scroll`;
+const animationDelay = `${0.1 * (index + 1)}s`;
+---
+
+<div
+  class={cardClasses}
+  style={`animation-delay: ${animationDelay}`}
+  data-service-id={service.id}
+  role="article"
+  aria-labelledby={`service-title-${service.id}`}
+>
+  <div class="card-glow" aria-hidden="true"></div>
+
+  <div class="card-content">
+    <div class="icon-wrapper" aria-hidden="true">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        set:html={service.icon}
+      />
+    </div>
+
+    <h3 class="servicio-titulo" id={`service-title-${service.id}`}>
+      {service.titulo}
+    </h3>
+
+    <p class="servicio-descripcion">
+      {service.descripcion}
+    </p>
+  </div>
+
+  <div class="card-border" aria-hidden="true"></div>
+</div>
+
+<style>
+  /* Card de servicio */
+  .servicio-card {
+    position: relative;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    overflow: hidden;
+    transition: all var(--transition);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+  }
+
+  .servicio-card.large {
+    grid-column: span 2;
+  }
+
+  .servicio-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .servicio-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Glow animado */
+  .card-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--accent) 0%, transparent 50%);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    transition: opacity var(--transition);
+    z-index: 0;
+    filter: blur(20px);
+  }
+
+  .servicio-card:hover .card-glow {
+    opacity: 0.3;
+  }
+
+  /* Border animado */
+  .card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    transition: border-color var(--transition);
+    pointer-events: none;
+  }
+
+  .servicio-card:hover .card-border {
+    border-color: var(--accent);
+  }
+
+  /* Contenido */
+  .card-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--accent);
+    transition: all var(--transition);
+    flex-shrink: 0;
+  }
+
+  .servicio-card:hover .icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .servicio-titulo {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .servicio-descripcion {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .servicio-card:hover .servicio-titulo {
+    color: var(--accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .servicio-card.large {
+      grid-column: span 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .servicio-card {
+      padding: 24px;
+    }
+  }
+</style>

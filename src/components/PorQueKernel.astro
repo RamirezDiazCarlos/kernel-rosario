@@ -1,0 +1,350 @@
+---
+const diferenciadores = [
+  {
+    numero: "01",
+    titulo: "Experiencia Técnica Real",
+    descripcion:
+      "No solo reparo, entiendo cada componente y su interacción. Estudiante de programación con conocimiento profundo de hardware y software.",
+    icon: `<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/>`,
+  },
+  {
+    numero: "02",
+    titulo: "Presupuestos Transparentes",
+    descripcion:
+      "Sin sorpresas. Te informo el costo antes de empezar cualquier trabajo. Presupuesto sin cargo.",
+    icon: `<line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>`,
+  },
+  {
+    numero: "03",
+    titulo: "Soluciones Personalizadas",
+    descripcion:
+      "Cada usuario es diferente. Adapto las soluciones a tu forma de usar el equipo, no uso recetas genéricas.",
+    icon: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  },
+  {
+    numero: "04",
+    titulo: "Optimización Inteligente",
+    descripcion:
+      "No solo arreglo lo que está roto. Optimizo tu sistema para que rinda al máximo, incluso si es antiguo.",
+    icon: `<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>`,
+  },
+];
+---
+
+<section class="porque-section">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="section-tag">¿POR QUÉ KERNEL?</span>
+      <h2 class="section-title">
+        Más que reparación,<br />
+        <span class="gradient-text">soluciones completas</span>
+      </h2>
+    </div>
+
+    <div class="diferenciadores-grid">
+      {
+        diferenciadores.map((item, index) => (
+          <div
+            class="diferenciador-card animate-on-scroll"
+            style={`animation-delay: ${0.1 * (index + 1)}s`}
+          >
+            <div class="card-header">
+              <span class="numero">{item.numero}</span>
+              <div class="icon-container">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={item.icon}
+                />
+              </div>
+            </div>
+
+            <h3 class="card-titulo">{item.titulo}</h3>
+            <p class="card-descripcion">{item.descripcion}</p>
+
+            <div class="card-decoration" />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- CTA adicional -->
+    <div class="cta-wrapper animate-on-scroll">
+      <div class="cta-box">
+        <div class="cta-content">
+          <h3>¿Tenés dudas sobre tu equipo?</h3>
+          <p>Consultame sin compromiso. El diagnóstico es gratuito.</p>
+        </div>
+        <a href="#contacto" class="btn-cta">
+          Hacer una consulta
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="5" x2="19" y1="12" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .porque-section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  /* Grid de diferenciadores */
+  .diferenciadores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  /* Card de diferenciador */
+  .diferenciador-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition);
+  }
+
+  .diferenciador-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+  }
+
+  .diferenciador-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .diferenciador-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Header de card */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .numero {
+    font-size: 48px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--bg-tertiary);
+    line-height: 1;
+    transition: color var(--transition);
+  }
+
+  .diferenciador-card:hover .numero {
+    color: var(--accent);
+  }
+
+  .icon-container {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--accent);
+    transition: all var(--transition);
+  }
+
+  .diferenciador-card:hover .icon-container {
+    transform: rotate(10deg) scale(1.1);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Contenido */
+  .card-titulo {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .card-descripcion {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Decoración */
+  .card-decoration {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(
+      circle at bottom right,
+      rgba(0, 255, 136, 0.1) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .cta-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cta-box {
+    background: linear-gradient(
+      135deg,
+      var(--bg-secondary) 0%,
+      var(--bg-tertiary) 100%
+    );
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at top left,
+      rgba(0, 255, 136, 0.1) 0%,
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+
+  .cta-content {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-content h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  .cta-content p {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--accent);
+    color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all var(--transition);
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-cta:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-cta svg {
+    transition: transform var(--transition);
+  }
+
+  .btn-cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .diferenciadores-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .porque-section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .diferenciadores-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .diferenciador-card {
+      padding: 28px;
+    }
+
+    .cta-box {
+      flex-direction: column;
+      padding: 36px 24px;
+      gap: 24px;
+      text-align: center;
+    }
+
+    .btn-cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

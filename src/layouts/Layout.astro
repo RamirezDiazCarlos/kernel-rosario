@@ -1,0 +1,269 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Kernel - El núcleo de tus soluciones tecnológicas",
+  description = "Reparación profesional de PC y notebooks. Diagnóstico gratuito, atención personalizada y optimización de hardware. Armado, limpieza y recuperación de datos.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- Preconnect para fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+
+    <!-- Favicon SVG inline -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%2300ff88' width='100' height='100' rx='20'/%3E%3Cpath fill='%230a0a0a' d='M30 30h40v10H30z M30 50h40v10H30z M30 70h25v10H30z'/%3E%3C/svg%3E"
+    />
+
+    <style is:global>
+      :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-tertiary: #252525;
+        --accent: #00ff88;
+        --accent-dim: #00cc6e;
+        --text-primary: #ffffff;
+        --text-secondary: #e5e5e5;
+        --text-muted: #999999;
+        --border: rgba(255, 255, 255, 0.1);
+        --border-hover: rgba(0, 255, 136, 0.3);
+
+        --font-display: "Sora", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+        --shadow-glow: 0 0 30px rgba(0, 255, 136, 0.2);
+
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-display);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+
+      /* Estilos de selección */
+      ::selection {
+        background: var(--accent);
+        color: var(--bg-primary);
+      }
+
+      /* Scrollbar personalizado */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg-primary);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--bg-tertiary);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
+      }
+
+      /* Utilidades globales */
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+      /* Animaciones de entrada */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .animate-on-scroll {
+        opacity: 0;
+      }
+
+      .animate-on-scroll.visible {
+        animation: fadeInUp 0.8s var(--transition) forwards;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 200vh;
+        background-image: linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.3;
+        pointer-events: none;
+        z-index: -1;
+        will-change: transform;
+      }
+
+      /* Desactivar grid en móviles */
+      @media (max-width: 768px) {
+        body::before {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+
+    <!-- Intersection Observer para animaciones -->
+    <script>
+      import {
+        initScrollAnimations,
+        isIntersectionObserverSupported,
+      } from "../utils/intersection-observer";
+
+      // Configura las animaciones de scroll usando Intersection Observer
+      const setupScrollAnimations = (): void => {
+        // Early return si no esta en un entorno de navegador
+        if (typeof window === "undefined") {
+          return;
+        }
+
+        // Verifica soporte
+        if (!isIntersectionObserverSupported()) {
+          console.info(
+            "Scroll animations disabled: IntersectionObserver not supported"
+          );
+          return;
+        }
+
+        // Inicializa el observador
+        let observer: ReturnType<typeof initScrollAnimations> | null = null;
+
+        const init = (): void => {
+          try {
+            observer = initScrollAnimations();
+          } catch (error) {
+            console.error("Failed to initialize scroll animations:", error);
+          }
+        };
+
+        // Inicia cuando el DOM esté listo
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init, { once: true });
+        } else {
+          init();
+        }
+
+        // Limpieza al descargar la página
+        window.addEventListener(
+          "beforeunload",
+          () => {
+            if (observer) {
+              observer.cleanup();
+              observer = null;
+            }
+          },
+          { once: true }
+        );
+
+        // Reinicializa después de un swap de Astro (SPA navigation)
+        document.addEventListener("astro:before-swap", () => {
+          if (observer) {
+            observer.cleanup();
+          }
+        });
+
+        document.addEventListener("astro:after-swap", () => {
+          if (observer) {
+            observer.reinit();
+          }
+        });
+      };
+
+      setupScrollAnimations();
+    </script>
+  </body>
+</html>

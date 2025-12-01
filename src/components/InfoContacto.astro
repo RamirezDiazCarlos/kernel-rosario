@@ -1,0 +1,370 @@
+---
+// Configuración centralizada de contacto
+interface ContactConfig {
+  whatsapp: {
+    number: string;
+    displayNumber: string;
+    defaultMessage: string;
+  };
+  email: string;
+  phone: string;
+  address: string;
+  instagram: string;
+  schedule: string;
+}
+
+const contactConfig: ContactConfig = {
+  whatsapp: {
+    number: "5493412250129",
+    displayNumber: "+54 9 341 2250129",
+    defaultMessage: "Hola! Necesito ayuda con mi equipo",
+  },
+  email: "kernel.tech.rosario@gmail.com",
+  phone: "+54 9 341 2250129",
+  address: "Zona Centro, Rosario, Santa Fe",
+  instagram: "https://www.instagram.com/kernelrosario?igsh=bXJrazJlOGF6MjYy",
+  schedule: "Disponible de Lun a Sáb • 9:00 - 20:00hs",
+};
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+
+// URL de WhatsApp
+const whatsappUrl = `https://wa.me/${contactConfig.whatsapp.number}?text=${encodeURIComponent(contactConfig.whatsapp.defaultMessage)}`;
+---
+
+<div class={`contacto-info ${className}`}>
+  <span class="section-tag">CONTACTO</span>
+
+  <h2 class="contacto-titulo">
+    Empecemos a trabajar<br />
+    en <span class="gradient-text">tu equipo</span>
+  </h2>
+
+  <p class="contacto-descripcion">
+    Contáctame por WhatsApp para un diagnóstico rápido o completá el formulario
+    y te respondo a la brevedad. El diagnóstico es <strong>sin cargo</strong>.
+  </p>
+
+  <!-- WhatsApp -->
+  <a
+    href={whatsappUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="whatsapp-btn"
+    aria-label={`Contactar por WhatsApp al ${contactConfig.whatsapp.displayNumber}`}
+  >
+    <div class="whatsapp-icon" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+        ></path>
+      </svg>
+    </div>
+    <div class="whatsapp-content">
+      <span class="whatsapp-label">Escribime por WhatsApp</span>
+      <span class="whatsapp-number">{contactConfig.whatsapp.displayNumber}</span
+      >
+    </div>
+    <svg
+      class="whatsapp-arrow"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <line x1="5" x2="19" y1="12" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </a>
+
+  <!-- Métodos alternativos -->
+  <div class="metodos-contacto">
+    <div class="metodo-item">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+      </svg>
+      <a
+        href={`mailto:${contactConfig.email}`}
+        aria-label={`Enviar email a ${contactConfig.email}`}
+      >
+        {contactConfig.email}
+      </a>
+    </div>
+
+    <div class="metodo-item">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+        ></path>
+      </svg>
+      <a
+        href={`tel:${contactConfig.phone.replace(/\s/g, "")}`}
+        aria-label={`Llamar al ${contactConfig.phone}`}
+      >
+        {contactConfig.phone}
+      </a>
+    </div>
+
+    <div class="metodo-item">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      <span>{contactConfig.address}</span>
+    </div>
+
+    <div class="metodo-item">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+      </svg>
+      <a
+        href={contactConfig.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Seguinos en Instagram @kernelrosario"
+      >
+        @kernelrosario
+      </a>
+    </div>
+  </div>
+
+  <!-- Horarios -->
+  <div class="horarios">
+    <div class="horario-badge">
+      <span class="pulse-indicator" aria-hidden="true"></span>
+      <span>{contactConfig.schedule}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .contacto-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    width: fit-content;
+  }
+
+  .contacto-titulo {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-dim) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+
+  .contacto-descripcion {
+    font-size: 18px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .contacto-descripcion strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* WhatsApp button */
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: white;
+    transition: all var(--transition);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+  }
+
+  .whatsapp-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
+  }
+
+  .whatsapp-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+  }
+
+  .whatsapp-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .whatsapp-label {
+    font-size: 14px;
+    opacity: 0.9;
+    font-weight: 500;
+  }
+
+  .whatsapp-number {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+
+  .whatsapp-arrow {
+    flex-shrink: 0;
+    transition: transform var(--transition);
+  }
+
+  .whatsapp-btn:hover .whatsapp-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Métodos de contacto */
+  .metodos-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .metodo-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 15px;
+  }
+
+  .metodo-item svg {
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .metodo-item a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .metodo-item a:hover {
+    color: var(--accent);
+  }
+
+  /* Horarios */
+  .horarios {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .horario-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-size: 14px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .pulse-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .whatsapp-btn {
+      padding: 20px;
+    }
+
+    .whatsapp-number {
+      font-size: 18px;
+    }
+  }
+</style>
