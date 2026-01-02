@@ -24,14 +24,14 @@ const {
 
     <!-- Fonts optimizadas -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
       <link
-        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap"
         rel="stylesheet"
       />
     </noscript>
@@ -46,6 +46,17 @@ const {
     />
 
     <style is:global>
+      /* Departure Mono Font */
+      @font-face {
+        font-family: "Departure Mono";
+        src: url("/fonts/DepartureMono-Regular.woff2") format("woff2"),
+             url("/fonts/DepartureMono-Regular.woff") format("woff"),
+             url("/fonts/DepartureMono-Regular.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
       :root {
         --bg-primary: #0a0a0a;
         --bg-secondary: #1a1a1a;
@@ -59,7 +70,7 @@ const {
         --border-hover: rgba(0, 255, 136, 0.3);
 
         --font-display: "Sora", -apple-system, BlinkMacSystemFont, sans-serif;
-        --font-mono: "JetBrains Mono", "Courier New", monospace;
+        --font-mono: "Departure Mono", "Courier New", monospace;
 
         --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
         --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
