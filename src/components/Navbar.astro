@@ -1,0 +1,291 @@
+---
+
+---
+
+<nav class="navbar" id="navbar">
+  <div class="container nav-container">
+    <a href="#" class="nav-logo" aria-label="Kernel - Inicio">
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <rect width="100" height="100" rx="20" fill="url(#navGradient)"></rect>
+        <path
+          d="M30 30h40v10H30z M30 50h40v10H30z M30 70h25v10H30z"
+          fill="currentColor"></path>
+        <defs>
+          <linearGradient id="navGradient" x1="0" y1="0" x2="100" y2="100">
+            <stop offset="0%" stop-color="var(--accent)"></stop>
+            <stop offset="100%" stop-color="var(--accent-dim)"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span>KERNEL</span>
+    </a>
+
+    <div class="nav-links" id="nav-links">
+      <a href="#desarrollo-web" class="nav-link">Desarrollo Web</a>
+      <a href="#servicios" class="nav-link">Servicios PC</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
+    </div>
+
+    <button
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+    >
+      <span class="hamburger"></span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 16px 0;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid transparent;
+    transition: padding var(--transition), border-color var(--transition), background var(--transition);
+  }
+
+  .navbar.scrolled {
+    padding: 12px 0;
+    border-bottom-color: var(--border);
+    background: rgba(10, 10, 10, 0.95);
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-logo svg {
+    color: var(--bg-primary);
+  }
+
+  .nav-logo span {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color var(--transition);
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width var(--transition);
+  }
+
+  .nav-link:hover {
+    color: var(--accent);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    position: relative;
+    transition: all var(--transition);
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all var(--transition);
+  }
+
+  .hamburger::before {
+    top: -7px;
+  }
+
+  .hamburger::after {
+    top: 7px;
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger {
+    background: transparent;
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+    background: var(--accent);
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+    background: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      transition: padding var(--transition), border-color var(--transition), background var(--transition), height var(--transition);
+    }
+
+    .navbar.menu-open {
+      height: 100vh;
+      height: 100dvh;
+      background: #0a0a0a;
+      border-bottom-color: transparent;
+    }
+
+    .nav-container {
+      position: relative;
+    }
+
+    .nav-toggle {
+      display: block;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      height: 100dvh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity var(--transition), visibility var(--transition);
+    }
+
+    .nav-links.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .nav-link {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .nav-link::after {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const initNavbar = () => {
+      const navbar = document.getElementById('navbar');
+      const toggle = document.getElementById('nav-toggle');
+      const links = document.getElementById('nav-links');
+
+      if (!navbar || !toggle || !links) return;
+
+      // Scroll effect with rAF to avoid forced reflow
+      let ticking = false;
+      const handleScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            if (!navbar.classList.contains('menu-open')) {
+              navbar.classList.toggle('scrolled', window.scrollY > 50);
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      requestAnimationFrame(() => handleScroll());
+
+      // Mobile toggle
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        links.classList.toggle('open');
+        navbar.classList.toggle('menu-open');
+        document.body.style.overflow = !isOpen ? 'hidden' : '';
+      });
+
+      // Close on link click
+      links.querySelectorAll('.nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          toggle.setAttribute('aria-expanded', 'false');
+          links.classList.remove('open');
+          navbar.classList.remove('menu-open');
+          document.body.style.overflow = '';
+        });
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initNavbar);
+    } else {
+      initNavbar();
+    }
+  }
+</script>

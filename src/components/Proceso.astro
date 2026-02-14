@@ -1,0 +1,245 @@
+---
+interface Paso {
+  readonly numero: string;
+  readonly titulo: string;
+  readonly descripcion: string;
+  readonly icon: string;
+}
+
+const pasos: ReadonlyArray<Paso> = [
+  {
+    numero: '01',
+    titulo: 'Contanos tu idea',
+    descripcion: 'Nos contás tu servicio y qué querés lograr: consultas, reservas, ventas.',
+    icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>',
+  },
+  {
+    numero: '02',
+    titulo: 'Armamos el contenido',
+    descripcion: 'Te pedimos contenido básico (logo, fotos, textos) o lo armamos juntos.',
+    icon: '<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><line x1="10" x2="8" y1="9" y2="9"></line>',
+  },
+  {
+    numero: '03',
+    titulo: 'Diseño y desarrollo',
+    descripcion: 'Diseñamos y desarrollamos la web con foco en claridad, velocidad y conversión.',
+    icon: '<polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>',
+  },
+  {
+    numero: '04',
+    titulo: 'Publicación',
+    descripcion: 'La publicamos con tu dominio y la dejamos lista para aparecer en Google.',
+    icon: '<path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path>',
+  },
+  {
+    numero: '05',
+    titulo: 'Mantenimiento',
+    descripcion: 'Desde ahí, entra el mantenimiento mensual para soporte, ajustes y mejoras.',
+    icon: '<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 6v6l4 2"></path>',
+  },
+];
+---
+
+<section id="proceso" class="proceso-section">
+  <div class="container">
+    <header class="section-header animate-on-scroll">
+      <span class="section-tag">PROCESO</span>
+      <h2 class="section-title">
+        Así trabajamos,<br />
+        <span class="gradient-text">simple y sin vueltas</span>
+      </h2>
+    </header>
+
+    <div class="pasos-grid">
+      {pasos.map((paso, index) => (
+        <div class="paso-item animate-on-scroll" style={`animation-delay: ${0.1 * (index + 1)}s`}>
+          <div class="paso-top">
+            <div class="paso-icon-wrapper">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                set:html={paso.icon}
+              />
+            </div>
+            <h3 class="paso-titulo">{paso.titulo}</h3>
+          </div>
+          <span class="paso-numero">{paso.numero}</span>
+          <p class="paso-descripcion">{paso.descripcion}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .proceso-section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+
+  .pasos-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+
+  .paso-item {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: all var(--transition);
+  }
+
+  .paso-top {
+    display: contents;
+  }
+
+  .paso-item:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+  }
+
+  .paso-item:hover .paso-numero {
+    color: var(--accent);
+  }
+
+  .paso-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--accent);
+    transition: all var(--transition);
+  }
+
+  .paso-item:hover .paso-icon-wrapper {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: var(--accent);
+  }
+
+  .paso-numero {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--bg-tertiary);
+    transition: color var(--transition);
+  }
+
+  .paso-titulo {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .paso-descripcion {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .paso-connector {
+    display: none;
+  }
+
+  @media (max-width: 1200px) {
+    .pasos-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .proceso-section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .pasos-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .paso-item {
+      text-align: left;
+      align-items: flex-start;
+      padding: 24px;
+      gap: 12px;
+    }
+
+    .paso-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .paso-icon-wrapper {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+    }
+
+    .paso-titulo {
+      font-size: 16px;
+    }
+
+    .paso-numero {
+      display: none;
+    }
+  }
+</style>

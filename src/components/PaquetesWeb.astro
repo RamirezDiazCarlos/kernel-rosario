@@ -1,0 +1,392 @@
+---
+interface PaqueteFeature {
+  readonly text: string;
+}
+
+interface PaqueteMantenimiento {
+  readonly text: string;
+}
+
+interface Paquete {
+  readonly nombre: string;
+  readonly subtitulo: string;
+  readonly descripcion: string;
+  readonly features: ReadonlyArray<PaqueteFeature>;
+  readonly mantenimiento: ReadonlyArray<PaqueteMantenimiento>;
+  readonly destacado?: boolean;
+}
+
+const paquetes: ReadonlyArray<Paquete> = [
+  {
+    nombre: 'Landing Esencial',
+    subtitulo: 'Ideal para empezar a recibir consultas',
+    descripcion: 'Una página simple y profesional para que te encuentren, entiendan lo que ofrecés y te contacten sin vueltas.',
+    features: [
+      { text: '1 página tipo "scroll" con secciones claras: presentación, servicios, beneficios, preguntas frecuentes y contacto' },
+      { text: 'Diseño adaptable a celular y PC (responsive)' },
+      { text: 'Botón de WhatsApp y formulario de contacto' },
+      { text: 'Dominio propio: te guío para comprarlo y lo dejo funcionando' },
+      { text: 'Base de Google lista: títulos, descripciones y mapa del sitio' },
+      { text: 'Velocidad y experiencia: optimización para carga rápida' },
+    ],
+    mantenimiento: [
+      { text: 'Revisión técnica general y control de funcionamiento' },
+      { text: 'Cambios de contenido hasta 60 min/mes' },
+      { text: 'Soporte por WhatsApp para dudas o ajustes' },
+    ],
+  },
+  {
+    nombre: 'Landing Pro',
+    subtitulo: 'Para convertir visitas en clientes',
+    descripcion: 'Para profesionales que quieren una web pensada para que la gente entienda, confíe y termine consultando.',
+    features: [
+      { text: 'Todo lo del Esencial incluido' },
+      { text: 'Estructura orientada a conversión' },
+      { text: 'Textos más estratégicos: qué hacés, para quién, por qué elegirte' },
+      { text: 'SEO inicial más completo para aparecer en búsquedas relevantes' },
+      { text: 'Medición de resultados: saber cuánta gente entra y desde dónde' },
+    ],
+    mantenimiento: [
+      { text: 'Todo lo del Esencial' },
+      { text: 'Ajustes de SEO on-page según rendimiento' },
+      { text: 'Cambios de contenido hasta 120 min/mes' },
+      { text: 'Revisión mensual: qué mejorar y qué conviene publicar' },
+    ],
+    destacado: true,
+  },
+  {
+    nombre: 'Sitio Profesional',
+    subtitulo: '3 a 6 páginas + SEO local',
+    descripcion: 'Si tenés varios servicios, querés mostrar portfolio, o necesitás que cada tema tenga su propia página para posicionar mejor.',
+    features: [
+      { text: 'Entre 3 y 6 páginas (Inicio, Servicios, Sobre mí, Portfolio, FAQ, Contacto)' },
+      { text: 'Estructura clara y escalable para crecer' },
+      { text: 'SEO local: optimización para búsquedas tipo "servicio + ciudad"' },
+      { text: 'Formulario, WhatsApp y llamados a la acción bien ubicados' },
+      { text: 'Guía de contenido para generar confianza' },
+    ],
+    mantenimiento: [
+      { text: 'Revisión técnica + monitoreo básico' },
+      { text: 'Cambios de contenido hasta 180 min/mes' },
+      { text: 'Soporte y mejoras continuas mensuales' },
+    ],
+  },
+];
+---
+
+<section id="paquetes" class="paquetes-section">
+  <div class="container">
+    <header class="section-header animate-on-scroll">
+      <span class="section-tag">PAQUETES</span>
+      <h2 class="section-title">
+        Elegí el plan que mejor<br />
+        <span class="gradient-text">se adapte a tu negocio</span>
+      </h2>
+      <p class="section-description">
+        Todos los paquetes incluyen <strong>mantenimiento mensual</strong>, para que tu web se mantenga viva, actualizada y funcionando.
+      </p>
+    </header>
+
+    <div class="paquetes-grid">
+      {paquetes.map((paquete, index) => (
+        <article class={`paquete-card ${paquete.destacado ? 'destacado' : ''} animate-on-scroll`} style={`animation-delay: ${0.1 * (index + 1)}s`}>
+          {paquete.destacado && <span class="badge-popular">Recomendado</span>}
+          <div class="paquete-header">
+            <h3 class="paquete-nombre">{paquete.nombre}</h3>
+            <p class="paquete-subtitulo">{paquete.subtitulo}</p>
+          </div>
+
+          <p class="paquete-descripcion">{paquete.descripcion}</p>
+
+          <div class="paquete-precio">
+            <span class="precio-texto">Precio a consultar</span>
+          </div>
+
+          <div class="paquete-features">
+            <h4 class="features-label">Incluye</h4>
+            <ul>
+              {paquete.features.map((feature) => (
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>{feature.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="paquete-mantenimiento">
+            <h4 class="features-label">Mantenimiento mensual</h4>
+            <ul>
+              {paquete.mantenimiento.map((item) => (
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>{item.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <a href="#contacto" class={`paquete-cta ${paquete.destacado ? 'cta-primary' : 'cta-secondary'}`}>
+            Consultar precio
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="5" x2="19" y1="12" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .paquetes-section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+
+  .section-description {
+    font-size: 18px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .section-description strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .paquetes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .paquete-card {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: all var(--transition);
+  }
+
+  .paquete-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+  }
+
+  .paquete-card.destacado {
+    border-color: var(--accent);
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.1);
+  }
+
+  .badge-popular {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 20px;
+    background: var(--accent);
+    color: var(--bg-primary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: var(--radius-lg);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+
+  .paquete-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .paquete-nombre {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .paquete-subtitulo {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+    font-family: var(--font-mono);
+  }
+
+  .paquete-descripcion {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .paquete-precio {
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .precio-texto {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+  }
+
+  .paquete-features,
+  .paquete-mantenimiento {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .features-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: var(--font-mono);
+  }
+
+  .paquete-features ul,
+  .paquete-mantenimiento ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .paquete-features li,
+  .paquete-mantenimiento li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .paquete-features li svg,
+  .paquete-mantenimiento li svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .paquete-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition);
+    margin-top: auto;
+  }
+
+  .cta-primary {
+    background: var(--accent);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.4);
+  }
+
+  .cta-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+
+  .cta-secondary:hover {
+    border-color: var(--accent);
+    background: rgba(0, 255, 136, 0.05);
+  }
+
+  .paquete-cta svg {
+    transition: transform var(--transition);
+  }
+
+  .paquete-cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1024px) {
+    .paquetes-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .paquete-card.destacado {
+      order: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .paquetes-section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .paquete-card {
+      padding: 32px 24px;
+    }
+  }
+</style>

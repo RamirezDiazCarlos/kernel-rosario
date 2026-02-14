@@ -5,8 +5,8 @@ interface Props {
 }
 
 const {
-  title = "Kernel - El núcleo de tus soluciones tecnológicas",
-  description = "Reparación profesional de PC y notebooks. Diagnóstico gratuito, atención personalizada y optimización de hardware. Armado, limpieza y recuperación de datos.",
+  title = "Kernel - Desarrollo web y soluciones tecnológicas en Rosario",
+  description = "Diseño y desarrollo de páginas web profesionales en Rosario. Landing pages, sitios corporativos y SEO local. También reparación y armado de PC con atención personalizada.",
 } = Astro.props;
 ---
 
@@ -183,11 +183,12 @@ const {
         }
       }
 
-      .animate-on-scroll {
+      /* Animaciones solo cuando JS está disponible */
+      .js-ready .animate-on-scroll {
         opacity: 0;
       }
 
-      .animate-on-scroll.visible {
+      .js-ready .animate-on-scroll.visible {
         animation: fadeInUp 0.8s var(--transition) forwards;
       }
 
@@ -204,7 +205,6 @@ const {
         opacity: 0.3;
         pointer-events: none;
         z-index: -1;
-        will-change: transform;
       }
 
       /* Desactivar grid en móviles */
@@ -216,7 +216,10 @@ const {
     </style>
   </head>
   <body>
-    <slot />
+    <script is:inline>document.body.classList.add('js-ready');</script>
+    <main>
+      <slot />
+    </main>
 
     <!-- Intersection Observer para animaciones -->
     <script>

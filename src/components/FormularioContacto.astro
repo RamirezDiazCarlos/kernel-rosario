@@ -93,12 +93,20 @@ const { className = "" } = Astro.props;
       aria-describedby="servicio-error"
     >
       <option value="">Seleccioná un servicio</option>
-      <option value="reparacion">Reparación de PC/Notebook</option>
-      <option value="limpieza">Limpieza y mantenimiento</option>
-      <option value="armado">Armado de PC</option>
-      <option value="instalacion">Instalación de sistema</option>
-      <option value="recuperacion">Recuperación de datos</option>
-      <option value="diagnostico">Diagnóstico</option>
+      <optgroup label="Desarrollo Web">
+        <option value="landing-esencial">Landing Esencial</option>
+        <option value="landing-pro">Landing Pro</option>
+        <option value="sitio-profesional">Sitio Profesional</option>
+        <option value="rediseno-web">Rediseño web</option>
+      </optgroup>
+      <optgroup label="Soporte Técnico">
+        <option value="reparacion">Reparación de PC/Notebook</option>
+        <option value="limpieza">Limpieza y mantenimiento</option>
+        <option value="armado">Armado de PC</option>
+        <option value="instalacion">Instalación de sistema</option>
+        <option value="recuperacion">Recuperación de datos</option>
+        <option value="diagnostico">Diagnóstico</option>
+      </optgroup>
       <option value="otro">Otro</option>
     </select>
     <span class="error-message" id="servicio-error" role="alert"></span>
@@ -106,7 +114,7 @@ const { className = "" } = Astro.props;
 
   <div class="form-group">
     <label for="mensaje">
-      Contanos más sobre el problema
+      Contanos más sobre lo que necesitás
       <span class="required" aria-label="Campo obligatorio">*</span>
     </label>
     <textarea
@@ -116,7 +124,7 @@ const { className = "" } = Astro.props;
       required
       minlength="10"
       maxlength="1000"
-      placeholder="Describí brevemente qué está pasando con tu equipo..."
+      placeholder="Describí brevemente qué necesitás (web, reparación, etc.)..."
       aria-required="true"
       aria-describedby="mensaje-error"></textarea>
     <span class="error-message" id="mensaje-error" role="alert"></span>

@@ -1,20 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Servicios from '../components/Servicios.astro';
-import AtencionPersonalizada from '../components/AtencionPersonalizada.astro';
-import PorQueKernel from '../components/PorQueKernel.astro';
-import DesarrolloWeb from '../components/DesarrolloWeb.astro';
-import Contacto from '../components/Contacto.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import DesarrolloWeb from "../components/DesarrolloWeb.astro";
+import PaquetesWeb from "../components/PaquetesWeb.astro";
+import Proceso from "../components/Proceso.astro";
+import PorQueKernel from "../components/PorQueKernel.astro";
+import Servicios from "../components/Servicios.astro";
+import AtencionPersonalizada from "../components/AtencionPersonalizada.astro";
+import Contacto from "../components/Contacto.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
+  <Navbar />
   <Hero />
+  <DesarrolloWeb />
+  <PaquetesWeb />
+  <Proceso />
   <Servicios />
   <AtencionPersonalizada />
   <PorQueKernel />
-  <DesarrolloWeb />
   <Contacto />
   <Footer />
 </Layout>
