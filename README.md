@@ -30,6 +30,7 @@ kernel-rosario/
 │   │   ├── Hero.astro                # Hero principal (enfocado a desarrollo web)
 │   │   ├── DesarrolloWeb.astro       # Sección de servicios web + features
 │   │   ├── PaquetesWeb.astro         # 3 paquetes: Esencial, Pro, Profesional
+│   │   ├── Portfolio.astro           # Portfolio de proyectos realizados
 │   │   ├── Proceso.astro             # 5 pasos del proceso de trabajo
 │   │   ├── Servicios.astro           # Servicios de soporte técnico PC (bento grid)
 │   │   ├── ServiceCard.astro         # Card individual de servicio PC
@@ -52,7 +53,8 @@ kernel-rosario/
 │   └── data/
 │       └── services.data.ts          # Catálogo de servicios PC
 ├── public/
-│   └── fonts/                        # Departure Mono (font local)
+│   ├── fonts/                        # Departure Mono (font local)
+│   └── portfolio/                    # Screenshots de proyectos (.webp)
 └── package.json
 ```
 
@@ -62,12 +64,13 @@ kernel-rosario/
 2. **Hero** - Enfocado a desarrollo web como servicio principal
 3. **Desarrollo Web** - Features y puntos destacados del servicio
 4. **Paquetes Web** - Landing Esencial, Landing Pro, Sitio Profesional
-5. **Proceso** - 5 pasos: idea, contenido, desarrollo, publicación, mantenimiento
-6. **Servicios PC** - Bento grid con 8 servicios de soporte técnico
-7. **Atención Personalizada** - Diferenciador
-8. **Por Qué Kernel** - 4 razones de confianza
-9. **Contacto** - Info + formulario (con optgroups web/PC)
-10. **Footer** - Links a secciones web y PC + contacto + redes
+5. **Portfolio** - Proyectos realizados con screenshots y links
+6. **Proceso** - 5 pasos: idea, contenido, desarrollo, publicación, mantenimiento
+7. **Servicios PC** - Bento grid con 8 servicios de soporte técnico
+8. **Atención Personalizada** - Diferenciador
+9. **Por Qué Kernel** - 4 razones de confianza
+10. **Contacto** - Info + formulario (con optgroups web/PC)
+11. **Footer** - Links a secciones web y PC + contacto + redes
 
 ## Instalación y Desarrollo
 

@@ -1,0 +1,239 @@
+---
+interface Proyecto {
+  readonly nombre: string;
+  readonly tipo: string;
+  readonly imagen: string;
+  readonly link: string;
+}
+
+const proyectos: ReadonlyArray<Proyecto> = [
+  {
+    nombre: 'Club Atlético Unión de Clarke',
+    tipo: 'Sitio Institucional',
+    imagen: '/portfolio/union-clarke.webp',
+    link: 'https://uniondeclarke.com.ar/',
+  },
+  {
+    nombre: 'Tiempo Construcciones',
+    tipo: 'Landing Page',
+    imagen: '/portfolio/tiempo-construcciones.webp',
+    link: 'https://tiempoconstrucciones.vercel.app/',
+  },
+  {
+    nombre: 'DolarActual',
+    tipo: 'Web App',
+    imagen: '/portfolio/dolar-actual.webp',
+    link: 'https://dolaractual.netlify.app/',
+  },
+];
+---
+
+<section id="portfolio" class="portfolio-section">
+  <div class="container">
+    <header class="section-header animate-on-scroll">
+      <span class="section-tag">PORTFOLIO</span>
+      <h2 class="section-title">
+        Proyectos que<br />
+        <span class="gradient-text">hablan por sí solos</span>
+      </h2>
+    </header>
+
+    <div class="portfolio-grid">
+      {proyectos.map((proyecto, index) => (
+        <a
+          href={proyecto.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="portfolio-card animate-on-scroll"
+          style={`animation-delay: ${0.1 * (index + 1)}s`}
+        >
+          <div class="portfolio-image-wrapper">
+            <img
+              src={proyecto.imagen}
+              alt={`Captura de ${proyecto.nombre}`}
+              width="800"
+              height="500"
+              loading="lazy"
+              class="portfolio-image"
+            />
+          </div>
+          <div class="portfolio-content">
+            <span class="portfolio-tipo">{proyecto.tipo}</span>
+            <h3 class="portfolio-nombre">{proyecto.nombre}</h3>
+            <span class="portfolio-link-text">
+              Ver proyecto
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="7" x2="17" y1="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio-section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .portfolio-card {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition);
+  }
+
+  .portfolio-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+  }
+
+  .portfolio-image-wrapper {
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--bg-tertiary);
+  }
+
+  .portfolio-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition);
+  }
+
+  .portfolio-card:hover .portfolio-image {
+    transform: scale(1.03);
+  }
+
+  .portfolio-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .portfolio-tipo {
+    display: inline-block;
+    width: fit-content;
+    padding: 4px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .portfolio-nombre {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .portfolio-card:hover .portfolio-nombre {
+    color: var(--accent);
+  }
+
+  .portfolio-link-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    transition: color var(--transition);
+  }
+
+  .portfolio-card:hover .portfolio-link-text {
+    color: var(--accent);
+  }
+
+  .portfolio-link-text svg {
+    transition: transform var(--transition);
+  }
+
+  .portfolio-card:hover .portfolio-link-text svg {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 1024px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .portfolio-content {
+      padding: 20px;
+    }
+
+    .portfolio-nombre {
+      font-size: 18px;
+    }
+  }
+</style>
