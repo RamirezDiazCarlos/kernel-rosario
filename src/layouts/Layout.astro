@@ -39,6 +39,30 @@ const ogImage = new URL(image, Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <!-- Datos estructurados (JSON-LD) -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Kernel",
+      "description": description,
+      "url": "https://kernel-rosario.vercel.app",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `https://kernel-rosario.vercel.app/og-image.png`,
+        "width": 1200,
+        "height": 630
+      },
+      "image": `https://kernel-rosario.vercel.app/og-image.png`,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rosario",
+        "addressRegion": "Santa Fe",
+        "addressCountry": "AR"
+      },
+      "areaServed": "Rosario, Argentina",
+      "serviceType": ["Desarrollo web", "Landing pages", "Sitios corporativos", "SEO", "Reparación de PC"]
+    })} />
+
     <!-- Preconnect para fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
