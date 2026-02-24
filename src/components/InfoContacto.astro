@@ -66,8 +66,7 @@ const whatsappUrl = `https://wa.me/${contactConfig.whatsapp.number}?text=${encod
     </div>
     <div class="whatsapp-content">
       <span class="whatsapp-label">Escribime por WhatsApp</span>
-      <span class="whatsapp-number">{contactConfig.whatsapp.displayNumber}</span
-      >
+      <span class="whatsapp-number">Contactar ahora</span>
     </div>
     <svg
       class="whatsapp-arrow"
@@ -101,9 +100,9 @@ const whatsappUrl = `https://wa.me/${contactConfig.whatsapp.number}?text=${encod
       </svg>
       <a
         href={`mailto:${contactConfig.email}`}
-        aria-label={`Enviar email a ${contactConfig.email}`}
+        aria-label="Enviar un email"
       >
-        {contactConfig.email}
+        Correo electrónico
       </a>
     </div>
 
@@ -123,9 +122,9 @@ const whatsappUrl = `https://wa.me/${contactConfig.whatsapp.number}?text=${encod
       </svg>
       <a
         href={`tel:${contactConfig.phone.replace(/\s/g, "")}`}
-        aria-label={`Llamar al ${contactConfig.phone}`}
+        aria-label="Llamar por teléfono"
       >
-        {contactConfig.phone}
+        Llamar por teléfono
       </a>
     </div>
 
@@ -163,9 +162,9 @@ const whatsappUrl = `https://wa.me/${contactConfig.whatsapp.number}?text=${encod
         href={contactConfig.instagram}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Seguinos en Instagram @kernelrosario"
+        aria-label="Seguinos en Instagram"
       >
-        @kernelrosario
+        Seguinos en Instagram
       </a>
     </div>
   </div>
