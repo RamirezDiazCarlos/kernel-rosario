@@ -55,7 +55,7 @@ const whatsappUrl = `https://wa.me/${contactConfig.whatsapp.number}?text=${encod
     target="_blank"
     rel="noopener noreferrer"
     class="whatsapp-btn"
-    aria-label={`Contactar por WhatsApp al ${contactConfig.whatsapp.displayNumber}`}
+    aria-label="Contactar por WhatsApp"
   >
     <div class="whatsapp-icon" aria-hidden="true">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
@@ -84,7 +84,7 @@ const whatsappUrl = `https://wa.me/${contactConfig.whatsapp.number}?text=${encod
   </a>
 
   <!-- Métodos alternativos -->
-  <div class="metodos-contacto">
+  <div class="metodos-contacto" data-nosnippet>
     <div class="metodo-item">
       <svg
         width="20"
@@ -170,7 +170,7 @@ const whatsappUrl = `https://wa.me/${contactConfig.whatsapp.number}?text=${encod
   </div>
 
   <!-- Horarios -->
-  <div class="horarios">
+  <div class="horarios" data-nosnippet>
     <div class="horario-badge">
       <span class="pulse-indicator" aria-hidden="true"></span>
       <span>{contactConfig.schedule}</span>
