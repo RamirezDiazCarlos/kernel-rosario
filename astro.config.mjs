@@ -4,7 +4,7 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://kernel-rosario.vercel.app',
-  output: 'hybrid',
+  output: 'static',
   adapter: vercel(),
   integrations: [sitemap()],
   compressHTML: true,
