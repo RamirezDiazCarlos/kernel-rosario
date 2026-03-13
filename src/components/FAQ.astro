@@ -1,0 +1,261 @@
+---
+const faqs = [
+  {
+    pregunta: "¿Qué es el Dominio y por qué lo necesito?",
+    respuesta:
+      "Es tu dirección única en internet (ej: tuempresa.com.ar). Es lo que los clientes escriben para encontrarte y lo que te permite tener correos profesionales.",
+  },
+  {
+    pregunta: "¿Qué es el Hosting y por qué influye en el precio?",
+    respuesta:
+      "Es el 'alquiler' del espacio donde vive tu web. Un buen hosting asegura que tu sitio no se caiga y que cargue rápido, algo que Google valora mucho.",
+  },
+  {
+    pregunta: "¿Mi web se va a ver bien en celulares?",
+    respuesta:
+      "Totalmente. Aplico diseño responsive, lo que significa que la estructura se reorganiza sola para que la experiencia en móvil sea tan cómoda como en una PC.",
+  },
+  {
+    pregunta: "¿Qué es el certificado SSL (el candadito)?",
+    respuesta:
+      "Es una capa de seguridad que cifra los datos de tus clientes. Es obligatorio para que Google no marque tu web como 'No segura'.",
+  },
+  {
+    pregunta: "¿Quién es el dueño de la web una vez terminada?",
+    respuesta:
+      "Vos. El dominio y los archivos están a tu nombre. Mi política es la transparencia total: yo soy tu aliado técnico, no el dueño de tu negocio.",
+  },
+  {
+    pregunta: "¿Por qué necesito un mantenimiento mensual?",
+    respuesta:
+      "Una web es tecnología viva. El mantenimiento incluye actualizaciones de seguridad, copias de respaldo y ajustes de contenido para que tu sitio nunca quede obsoleto.",
+  },
+  {
+    pregunta: "¿Usás plantillas o WordPress para hacer las webs?",
+    respuesta:
+      "No. En Kernel diseño y desarrollo cada proyecto desde cero usando tecnologías modernas (como Astro). Esto permite que tu web sea mucho más rápida, segura y escalable que una hecha con plantillas genéricas, evitando el exceso de código innecesario.",
+  },
+];
+---
+
+<section id="faq" class="faq-section">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">
+        Preguntas <span class="gradient-text">frecuentes</span>
+      </h2>
+      <p class="section-description">
+        Todo lo que necesitás saber antes de arrancar con tu proyecto web.
+      </p>
+    </div>
+
+    <div class="faq-list animate-on-scroll">
+      {
+        faqs.map((faq, i) => (
+          <details class="faq-item" name="faq">
+            <summary class="faq-question">
+              <span class="faq-number">{String(i + 1).padStart(2, "0")}</span>
+              <span class="faq-question-text">{faq.pregunta}</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.respuesta}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  .faq-section::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.04) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 64px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+
+  .section-description {
+    font-size: 17px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Lista de FAQs */
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Item / details */
+  .faq-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--transition);
+  }
+
+  .faq-item[open] {
+    border-color: rgba(0, 255, 136, 0.25);
+  }
+
+  .faq-item:hover {
+    border-color: var(--border-hover);
+  }
+
+  /* Pregunta (summary) */
+  .faq-question {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 24px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background var(--transition);
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item[open] .faq-question {
+    background: var(--bg-tertiary);
+  }
+
+  .faq-number {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .faq-question-text {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform var(--transition), color var(--transition);
+    display: flex;
+    align-items: center;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  /* Respuesta */
+  .faq-answer {
+    padding: 0 24px 22px 56px;
+  }
+
+  .faq-answer p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .faq-section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .faq-question {
+      padding: 18px 16px;
+      gap: 12px;
+    }
+
+    .faq-answer {
+      padding: 0 16px 18px 16px;
+    }
+
+    .faq-number {
+      display: none;
+    }
+
+    .faq-question-text {
+      font-size: 15px;
+    }
+  }
+</style>
