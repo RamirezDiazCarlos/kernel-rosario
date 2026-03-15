@@ -9,9 +9,9 @@ interface Props {
 }
 
 const {
-  title = "Kernel - Desarrollo web y soluciones tecnológicas en Rosario",
-  description = "Diseño y desarrollo de páginas web profesionales en Rosario. Landing pages, sitios corporativos y SEO local. También reparación y armado de PC con atención personalizada.",
-  image = "/og-image.png",
+  title = "Kernel | Diseño y Desarrollo Web a Medida",
+  description = "Diseñamos y desarrollamos sitios web a medida según las necesidades de tu negocio, para que tus clientes te encuentren.",
+  image = "/og-image.jpg",
 } = Astro.props;
 
 const ogImage = new URL(image, Astro.site);
@@ -24,6 +24,7 @@ const ogImage = new URL(image, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0a0a0a" />
+    <link rel="canonical" href={Astro.url} />
 
     <!-- Open Graph / Redes sociales -->
     <meta property="og:type" content="website" />
@@ -48,14 +49,14 @@ const ogImage = new URL(image, Astro.site);
       "@type": "LocalBusiness",
       "name": "Kernel",
       "description": description,
-      "url": "https://kernel-rosario.vercel.app",
+      "url": "https://www.kerneldev.com.ar",
       "logo": {
         "@type": "ImageObject",
-        "url": `https://kernel-rosario.vercel.app/og-image.png`,
+        "url": `https://www.kerneldev.com.ar/og-image.jpg`,
         "width": 1200,
         "height": 630
       },
-      "image": `https://kernel-rosario.vercel.app/og-image.png`,
+      "image": `https://www.kerneldev.com.ar/og-image.jpg`,
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Rosario",
@@ -63,7 +64,11 @@ const ogImage = new URL(image, Astro.site);
         "addressCountry": "AR"
       },
       "areaServed": "Rosario, Argentina",
-      "serviceType": ["Desarrollo web", "Landing pages", "Sitios corporativos", "SEO", "Reparación de PC"]
+      "serviceType": ["Desarrollo web", "Landing pages", "Sitios corporativos", "E-commerce a medida", "Rediseño web", "SEO", "Reparación de PC"],
+      "sameAs": [
+        "https://www.instagram.com/kernelrosario",
+        "https://www.facebook.com/share/1C7qtibxwS/"
+      ]
     })} />
 
     <!-- Preconnect para fonts -->

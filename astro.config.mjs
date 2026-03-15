@@ -6,7 +6,7 @@ import tailwind from '@astrojs/tailwind';
 import { fileURLToPath } from 'url';
 
 export default defineConfig({
-  site: 'https://kernel-rosario.vercel.app',
+  site: 'https://www.kerneldev.com.ar',
   output: 'static',
   adapter: vercel(),
   integrations: [sitemap(), react(), tailwind({ applyBaseStyles: false, configFile: './tailwind.config.js' })],
