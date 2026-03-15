@@ -1,0 +1,127 @@
+---
+import MacbookShowcase from "./MacbookShowcase.tsx";
+---
+
+<section class="macbook-section">
+  <!-- Animación scroll: solo desktop -->
+  <div class="macbook-animated">
+    <MacbookShowcase client:visible />
+  </div>
+
+  <!-- Mockup estático: solo mobile -->
+  <div class="macbook-static">
+    <p class="static-title">Tu negocio, online y profesional.</p>
+    <div class="mac-frame">
+      <div class="mac-screen">
+        <img src="/tuNegocio2.webp" alt="Ejemplo de sitio web profesional" />
+      </div>
+      <div class="mac-notch"></div>
+      <div class="mac-base">
+        <div class="mac-keyboard"></div>
+      </div>
+      <div class="mac-foot"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .macbook-section {
+    position: relative;
+    background: var(--bg-primary);
+    overflow: hidden;
+  }
+
+  /* Desktop: animación */
+  .macbook-animated {
+    display: none;
+  }
+
+  /* Mobile: mockup estático */
+  .macbook-static {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 24px 40px;
+    gap: 32px;
+  }
+
+  .static-title {
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* MacBook frame */
+  .mac-frame {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mac-screen {
+    width: 100%;
+    background: #1a1a1a;
+    border-radius: 10px 10px 0 0;
+    border: 6px solid #2a2a2a;
+    border-bottom: none;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 0 0 1px #111,
+      0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+
+  .mac-screen img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .mac-notch {
+    width: 60px;
+    height: 6px;
+    background: #2a2a2a;
+    border-radius: 0 0 4px 4px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .mac-base {
+    width: 106%;
+    height: 14px;
+    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-radius: 0 0 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .mac-keyboard {
+    width: 40%;
+    height: 4px;
+    background: #222;
+    border-radius: 2px;
+  }
+
+  .mac-foot {
+    width: 112%;
+    height: 5px;
+    background: linear-gradient(180deg, #222 0%, #1a1a1a 100%);
+    border-radius: 0 0 8px 8px;
+  }
+
+  @media (min-width: 768px) {
+    .macbook-animated {
+      display: block;
+    }
+    .macbook-static {
+      display: none;
+    }
+  }
+</style>

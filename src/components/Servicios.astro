@@ -1,80 +1,179 @@
 ---
-import type { Service } from "../types/service.types";
-import { SERVICES_CATALOG } from "../data/services.data";
-import ServiceCard from "./ServiceCard.astro";
+const whatsappUrl = `https://wa.me/5493412250129?text=${encodeURIComponent("Hola! Necesito ayuda con mi equipo")}`;
 
-// Funcion para obtener los servicios
-const getServices = (): ReadonlyArray<Service> => {
-  // Validar que el catálogo de servicios no esté vacío
-  if (!SERVICES_CATALOG || SERVICES_CATALOG.length === 0) {
-    console.warn("SERVICES_CATALOG is empty or undefined");
-    return [];
-  }
+const categorias = [
+  {
+    id: "hardware",
+    titulo: "Reparación y Hardware",
+    icon: '<path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/>',
+    items: ["Reparación de notebooks y PCs", "Cambio de componentes dañados", "Diagnóstico de fallas"],
+  },
+  {
+    id: "software",
+    titulo: "Software y Sistemas",
+    icon: '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
+    items: ["Instalación de Windows y Linux", "Drivers y optimización", "Recuperación de datos"],
+  },
+  {
+    id: "mantenimiento",
+    titulo: "Mantenimiento Preventivo",
+    icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    items: ["Limpieza profunda del equipo", "Cambio de pasta térmica", "Optimización térmica"],
+  },
+  {
+    id: "armado",
+    titulo: "Asesoramiento y Armado",
+    icon: '<circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 19.07 4.93"/>',
+    items: ["Armado de PC personalizado", "Elección de componentes", "Diagnóstico sin cargo"],
+  },
+];
 
-  console.log(`Loaded ${SERVICES_CATALOG.length} services`);
-  return SERVICES_CATALOG;
-};
-
-const servicios = getServices();
-
-// Verificar si hay servicios disponibles
-const hasServices = servicios.length > 0;
-
-if (!hasServices) {
-  console.warn("No services found. Services section will be empty.");
-}
+const stats = [
+  {
+    icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',
+    valor: "Sin cargo",
+    label: "Diagnóstico inicial",
+  },
+  {
+    icon: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    valor: "Trato directo",
+    label: "Con el técnico",
+  },
+  {
+    icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    valor: "24hs",
+    label: "Tiempo de respuesta",
+  },
+];
 ---
 
-{
-  hasServices ? (
-    <section
-      id="servicios"
-      class="servicios-section"
-      aria-labelledby="servicios-heading"
-    >
-      <div class="container">
-        <header class="section-header animate-on-scroll">
-          <span class="section-tag" aria-label="Sección de">
-            SOPORTE TÉCNICO
-          </span>
-          <h2 id="servicios-heading" class="section-title">
-            Tu equipo en las
-            <br />
-            <span class="gradient-text">mejores manos</span>
-          </h2>
-        </header>
+<section id="servicios" class="servicios-section" aria-labelledby="servicios-heading">
+  <div class="container">
 
-        <div class="bento-grid">
-          {servicios.map((servicio, index) => (
-            <ServiceCard service={servicio} index={index} />
-          ))}
+    <!-- Header -->
+    <header class="section-header animate-on-scroll">
+      <span class="section-tag">SOPORTE TÉCNICO</span>
+      <h2 id="servicios-heading" class="section-title">
+        Tu equipo en las<br />
+        <span class="gradient-text">mejores manos</span>
+      </h2>
+    </header>
+
+    <!-- Bento 2×2 -->
+    <div class="bento-grid">
+      {categorias.map((cat, index) => (
+        <article
+          class="categoria-card animate-on-scroll"
+          style={`animation-delay: ${0.1 * (index + 1)}s`}
+        >
+          <div class="card-glow" aria-hidden="true"></div>
+          <div class="card-border" aria-hidden="true"></div>
+
+          <div class="card-content">
+            <div class="icon-wrapper" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"
+                set:html={cat.icon}
+              />
+            </div>
+
+            <h3 class="categoria-titulo">{cat.titulo}</h3>
+
+            <ul class="categoria-items">
+              {cat.items.map((item) => (
+                <li>
+                  <span class="item-dot" aria-hidden="true"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Stats strip -->
+    <div class="stats-strip animate-on-scroll">
+      <div class="stat-item">
+        <div class="stat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+            set:html={stats[0].icon}
+          />
+        </div>
+        <div class="stat-text">
+          <span class="stat-valor">{stats[0].valor}</span>
+          <span class="stat-label">{stats[0].label}</span>
         </div>
       </div>
-    </section>
-  ) : (
-    <section id="servicios" class="servicios-section servicios-empty">
-      <div class="container">
-        <div class="empty-state">
-          <p class="empty-message">
-            No hay servicios disponibles en este momento.
-          </p>
+
+      <div class="stat-divider" aria-hidden="true"></div>
+
+      <div class="stat-item">
+        <div class="stat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+            set:html={stats[1].icon}
+          />
+        </div>
+        <div class="stat-text">
+          <span class="stat-valor">{stats[1].valor}</span>
+          <span class="stat-label">{stats[1].label}</span>
         </div>
       </div>
-    </section>
-  )
-}
+
+      <div class="stat-divider" aria-hidden="true"></div>
+
+      <div class="stat-item">
+        <div class="stat-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+            set:html={stats[2].icon}
+          />
+        </div>
+        <div class="stat-text">
+          <span class="stat-valor">{stats[2].valor}</span>
+          <span class="stat-label">{stats[2].label}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrapper animate-on-scroll">
+      <div class="cta-box">
+        <div class="cta-box-glow" aria-hidden="true"></div>
+        <div class="cta-content">
+          <h3>¿Tenés dudas sobre tu equipo?</h3>
+          <p>Consultanos sin compromiso. El diagnóstico es gratuito.</p>
+        </div>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-cta">
+          Escribinos por WhatsApp
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <line x1="5" x2="19" y1="12" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <style>
-  /* Main section */
   .servicios-section {
     padding: 120px 0;
     position: relative;
   }
 
-  /* Header de sección */
+  /* Header */
   .section-header {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 64px;
   }
 
   .section-tag {
@@ -97,43 +196,261 @@ if (!hasServices) {
     letter-spacing: -0.02em;
   }
 
-  /* Bento Grid */
-  .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    grid-auto-rows: minmax(220px, auto);
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
   }
 
-  /* Empty state */
-  .servicios-empty {
-    min-height: 400px;
+  /* Bento 2×2 */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .categoria-card {
+    position: relative;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    overflow: hidden;
+    transition: transform var(--transition);
+  }
+
+  .categoria-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--accent) 0%, transparent 50%);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    transition: opacity var(--transition);
+    filter: blur(20px);
+    z-index: 0;
+  }
+
+  .categoria-card:hover .card-glow {
+    opacity: 0.2;
+  }
+
+  .card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    transition: border-color var(--transition);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .categoria-card:hover .card-border {
+    border-color: var(--accent);
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--accent);
+    transition: all var(--transition);
+    flex-shrink: 0;
   }
 
-  .empty-state {
-    text-align: center;
-    padding: 60px 20px;
+  .categoria-card:hover .icon-wrapper {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .categoria-titulo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.3;
+    transition: color var(--transition);
+  }
+
+  .categoria-card:hover .categoria-titulo {
+    color: var(--accent);
+  }
+
+  .categoria-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .categoria-items li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .item-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    display: flex;
+    align-items: center;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    max-width: 500px;
-    margin: 0 auto;
+    padding: 28px 40px;
+    margin-bottom: 20px;
   }
 
-  .empty-message {
-    font-size: 16px;
+  .stat-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .stat-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .stat-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-valor {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 13px;
     color: var(--text-muted);
-    line-height: 1.6;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 48px;
+    background: var(--border);
+    margin: 0 32px;
+    flex-shrink: 0;
+  }
+
+  /* CTA */
+  .cta-wrapper {
+    display: flex;
+    justify-content: stretch;
+  }
+
+  .cta-box {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    overflow: hidden;
+  }
+
+  .cta-box-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(0, 255, 136, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-content h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 6px 0;
+  }
+
+  .cta-content p {
+    font-size: 15px;
+    color: var(--text-muted);
     margin: 0;
+  }
+
+  .btn-cta {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--accent);
+    color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all var(--transition);
+    flex-shrink: 0;
+  }
+
+  .btn-cta:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
   }
 
   /* Responsive */
   @media (max-width: 1024px) {
-    .bento-grid {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    .stats-strip {
+      padding: 24px 32px;
     }
   }
 
@@ -142,17 +459,38 @@ if (!hasServices) {
       padding: 80px 0;
     }
 
-    .section-header {
-      margin-bottom: 60px;
-    }
-
     .bento-grid {
       grid-template-columns: 1fr;
       gap: 16px;
     }
 
-    .empty-state {
-      padding: 40px 20px;
+    .categoria-card {
+      padding: 24px;
+    }
+
+    .stats-strip {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    .stat-divider {
+      width: 100%;
+      height: 1px;
+      margin: 0;
+    }
+
+    .cta-box {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 32px 24px;
+      gap: 24px;
+    }
+
+    .btn-cta {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>

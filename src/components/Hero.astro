@@ -5,39 +5,16 @@
 <section class="hero">
   <div class="container">
     <div class="hero-content">
-      <!-- Logo animado -->
-      <div class="logo animate-on-scroll">
-        <svg
-          width="60"
-          height="60"
-          viewBox="0 0 100 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="100" height="100" rx="20" fill="url(#gradient)"></rect>
-          <path
-            d="M30 30h40v10H30z M30 50h40v10H30z M30 70h25v10H30z"
-            fill="currentColor"></path>
-          <defs>
-            <linearGradient id="gradient" x1="0" y1="0" x2="100" y2="100">
-              <stop offset="0%" stop-color="var(--accent)"></stop>
-              <stop offset="100%" stop-color="var(--accent-dim)"></stop>
-            </linearGradient>
-          </defs>
-        </svg>
-        <span>KERNEL</span>
-      </div>
-
-      <!-- Título principal -->
+      <!-- Título principal con flip -->
       <h1 class="hero-title animate-on-scroll">
-        Creamos la web que<br />
-        <span class="gradient-text">tu negocio necesita</span>
+        Creamos la web que tu negocio
+        <span class="flip-word gradient-text" id="flip-word">necesita</span>
       </h1>
 
       <!-- Subtítulo -->
       <p class="hero-subtitle animate-on-scroll">
-        Diseño web profesional, rápido y optimizado para que <strong>te encuentren y te contacten</strong>.
-        También reparamos y armamos tu PC.
+        Webs profesionales y de alto rendimiento para que <strong class="highlight">te encuentren y te contacten</strong>.
+        Soporte en 24hs y mantenimiento incluido. También reparamos y armamos tu PC.
       </p>
 
       <!-- CTAs -->
@@ -60,12 +37,6 @@
         </a>
         <a href="#servicios" class="btn btn-secondary"> Ver todos los servicios </a>
       </div>
-
-      <!-- Badge de confianza -->
-      <div class="trust-badge animate-on-scroll">
-        <span class="pulse-dot"></span>
-        <span>Diseño profesional • Mantenimiento incluido • Respuesta en 24hs</span>
-      </div>
     </div>
 
     <!-- Elemento decorativo -->
@@ -76,6 +47,39 @@
     </div>
   </div>
 </section>
+
+<script>
+  const words = ['necesita', 'merece', 'busca', 'proyecta'];
+  let index = 0;
+  const wordEl = document.getElementById('flip-word') as HTMLElement | null;
+
+  if (wordEl) {
+    setInterval(() => {
+      // Fase 1: fade out + sube levemente
+      wordEl.style.opacity = '0';
+      wordEl.style.transform = 'translateY(-6px)';
+
+      setTimeout(() => {
+        index = (index + 1) % words.length;
+        wordEl.textContent = words[index];
+
+        // Posicionar abajo sin transición
+        wordEl.style.transition = 'none';
+        wordEl.style.opacity = '0';
+        wordEl.style.transform = 'translateY(8px)';
+
+        // Fase 2: fade in + sube al lugar
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            wordEl.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+            wordEl.style.opacity = '1';
+            wordEl.style.transform = 'translateY(0)';
+          });
+        });
+      }, 350);
+    }, 2800);
+  }
+</script>
 
 <style>
   .hero {
@@ -91,31 +95,7 @@
     position: relative;
     z-index: 2;
     max-width: 800px;
-  }
-
-  /* Logo */
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 40px;
-    padding: 12px 24px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    color: var(--text-primary);
-    animation-delay: 0.1s;
-  }
-
-  .logo svg {
-    color: var(--bg-primary);
-  }
-
-  .logo span {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: 18px;
-    letter-spacing: 2px;
+    margin: 0 auto;
   }
 
   /* Título */
@@ -126,6 +106,12 @@
     margin-bottom: 24px;
     letter-spacing: -0.02em;
     animation-delay: 0.2s;
+  }
+
+  /* Flip word */
+  .flip-word {
+    display: block;
+    transition: opacity 0.35s ease, transform 0.35s ease;
   }
 
   .gradient-text {
@@ -150,8 +136,8 @@
     animation-delay: 0.3s;
   }
 
-  .hero-subtitle strong {
-    color: var(--accent);
+  .hero-subtitle .highlight {
+    color: var(--text-primary);
     font-weight: 600;
   }
 
@@ -160,7 +146,6 @@
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 40px;
     animation-delay: 0.4s;
   }
 
@@ -198,29 +183,6 @@
   .btn-secondary:hover {
     border-color: var(--accent);
     background: rgba(0, 255, 136, 0.05);
-  }
-
-  /* Trust badge */
-  .trust-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    font-size: 14px;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    animation-delay: 0.5s;
-  }
-
-  .pulse-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
   }
 
   .hero-visual {
