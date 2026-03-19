@@ -1,134 +1,160 @@
-# Kernel - Landing Page
+# Kernel — Desarrollo Web y Servicio Técnico
 
-Landing page para **Kernel**, desarrollo web profesional y servicio técnico de PC en Rosario, Santa Fe.
+Landing page de **Kernel**, agencia de desarrollo web y servicio técnico de PC en Rosario, Santa Fe, Argentina.
 
-## Tecnologías
+**Sitio en producción:** [kerneldev.com.ar](https://www.kerneldev.com.ar)
 
-- **[Astro](https://astro.build)** - Framework web moderno y rápido
-- **TypeScript** - Tipado estricto y seguridad
-- **CSS moderno** - Variables CSS, Grid, Flexbox
-- **FormSubmit** - Envío de formularios sin backend
+---
 
-## Características
+## Stack
 
-- Diseño moderno y minimalista con estética tech
-- Totalmente responsive (mobile-first)
-- Carga ultrarrápida y optimizada
-- Animaciones suaves al hacer scroll (progressive enhancement)
-- Formulario de contacto funcional
-- SEO optimizado
-- Accesible (ARIA labels, semántica HTML, main landmark)
-- Navbar sticky con menú hamburguesa en mobile
+| Tecnología                   | Versión | Uso                                            |
+| ---------------------------- | ------- | ---------------------------------------------- |
+| [Astro](https://astro.build) | 5.x     | Framework principal (output: hybrid)           |
+| React                        | 19      | Componentes interactivos (island architecture) |
+| TypeScript                   | —       | Tipado estricto en todo el proyecto            |
+| Tailwind CSS                 | 3.x     | Estilos utilitarios                            |
+| CSS puro                     | —       | Variables CSS, Grid, Flexbox                   |
+| Framer Motion                | 12.x    | Animaciones scroll-driven (MacBook section)    |
+| Resend                       | —       | Envío de emails transaccionales                |
+| Vercel Analytics             | —       | Métricas de visitas                            |
+| @astrojs/vercel              | —       | Adapter para deploy en Vercel                  |
+| @astrojs/sitemap             | —       | Generación automática de sitemap.xml           |
 
-## Estructura del Proyecto
+---
+
+## Estructura del proyecto
 
 ```
 kernel-rosario/
 ├── src/
 │   ├── components/
-│   │   ├── Navbar.astro              # Navegación sticky con menú mobile
-│   │   ├── Hero.astro                # Hero principal (enfocado a desarrollo web)
-│   │   ├── DesarrolloWeb.astro       # Sección de servicios web + features
-│   │   ├── PaquetesWeb.astro         # 3 paquetes: Esencial, Pro, Profesional
-│   │   ├── Portfolio.astro           # Portfolio de proyectos realizados
-│   │   ├── Proceso.astro             # 5 pasos del proceso de trabajo
-│   │   ├── Servicios.astro           # Servicios de soporte técnico PC (bento grid)
-│   │   ├── ServiceCard.astro         # Card individual de servicio PC
-│   │   ├── AtencionPersonalizada.astro # Diferenciador de atención
-│   │   ├── PorQueKernel.astro        # Razones para elegir Kernel
-│   │   ├── Contacto.astro            # Sección de contacto (wrapper)
-│   │   ├── InfoContacto.astro        # Datos de contacto y WhatsApp
-│   │   ├── FormularioContacto.astro  # Formulario con validación client-side
-│   │   └── Footer.astro              # Footer con links y redes
+│   │   ├── Navbar.astro                  # Sticky + hamburguesa en mobile
+│   │   ├── Hero.astro                    # Word flip animation + 2 CTAs
+│   │   ├── DesarrolloWeb.astro           # Servicios web + features
+│   │   ├── MacbookSection.astro          # Contenedor hybrid desktop/mobile
+│   │   ├── MacbookShowcase.tsx           # React island con scroll animation
+│   │   ├── FAQ.astro                     # Preguntas frecuentes
+│   │   ├── PaquetesWeb.astro             # 3 paquetes: Esencial, Pro, Profesional
+│   │   ├── Portfolio.astro               # Grid de proyectos realizados
+│   │   ├── Proceso.astro                 # 5 pasos del proceso de trabajo
+│   │   ├── Servicios.astro               # Bento grid de servicios PC
+│   │   ├── ServiceCard.astro             # Card individual de servicio
+│   │   ├── AtencionPersonalizada.astro   # Diferenciadores del servicio
+│   │   ├── PorQueKernel.astro            # Razones para elegir Kernel
+│   │   ├── Contacto.astro               # Wrapper de contacto
+│   │   ├── InfoContacto.astro            # Datos, WhatsApp, banner presupuesto
+│   │   ├── FormularioContacto.astro      # Formulario simple de contacto
+│   │   ├── Footer.astro                  # Links + redes sociales
+│   │   └── ui/
+│   │       └── macbook-scroll.tsx        # Componente scroll-driven (Aceternity UI)
 │   ├── layouts/
-│   │   └── Layout.astro              # Layout global (SEO, fonts, CSS vars)
+│   │   └── Layout.astro                  # HTML global, SEO, OG, JSON-LD, Analytics
 │   ├── pages/
-│   │   └── index.astro               # Página principal (composición de secciones)
+│   │   ├── index.astro                   # Página principal
+│   │   ├── presupuesto.astro             # Formulario de presupuesto
+│   │   └── presupuesto.ts                # Endpoint SSR — procesa y envía email via Resend
+│   ├── data/
+│   │   └── services.data.ts              # Catálogo de servicios PC
 │   ├── types/
-│   │   └── service.types.ts          # Tipos TypeScript para servicios
+│   │   └── service.types.ts              # Interfaces TypeScript
 │   ├── utils/
-│   │   ├── intersection-observer.ts  # Animaciones de scroll
-│   │   ├── service.helpers.ts        # Helpers para servicios
-│   │   └── service.validator.ts      # Validación de datos de servicios
-│   └── data/
-│       └── services.data.ts          # Catálogo de servicios PC
+│   │   ├── intersection-observer.ts      # ScrollAnimationObserver (scroll animations)
+│   │   ├── service.helpers.ts            # Helpers de servicios
+│   │   └── service.validator.ts          # Validación de datos
+│   ├── lib/
+│   │   └── utils.ts                      # cn() utility (clsx + tailwind-merge)
+│   └── styles/
+│       └── globals.css                   # Variables CSS + shadcn tokens
 ├── public/
-│   ├── fonts/                        # Departure Mono (font local)
-│   └── portfolio/                    # Screenshots de proyectos (.webp)
+│   ├── favicon/                          # ico, svg, png, webmanifest
+│   ├── fonts/                            # Departure Mono (local)
+│   ├── portfolio/                        # Screenshots de proyectos (.webp)
+│   ├── tuNegocio2.webp                  # Mockup para MacBook animation
+│   ├── og-image.jpg                      # Open Graph image (1200x630)
+│   └── robots.txt                        # SEO
+├── astro.config.mjs
+├── tailwind.config.js
 └── package.json
 ```
 
-## Orden de secciones
+---
 
-1. **Navbar** - Logo + Desarrollo Web / Servicios PC / Contacto
-2. **Hero** - Enfocado a desarrollo web como servicio principal
-3. **Desarrollo Web** - Features y puntos destacados del servicio
-4. **Paquetes Web** - Landing Esencial, Landing Pro, Sitio Profesional
-5. **Portfolio** - Proyectos realizados con screenshots y links
-6. **Proceso** - 5 pasos: idea, contenido, desarrollo, publicación, mantenimiento
-7. **Servicios PC** - Bento grid con 8 servicios de soporte técnico
-8. **Atención Personalizada** - Diferenciador
-9. **Por Qué Kernel** - 4 razones de confianza
-10. **Contacto** - Info + formulario (con optgroups web/PC)
-11. **Footer** - Links a secciones web y PC + contacto + redes
+## Orden de secciones (index)
 
-## Instalación y Desarrollo
+1. Navbar
+2. Hero — word flip: "necesita / merece / busca / proyecta"
+3. Desarrollo Web — descripción del servicio + features
+4. MacBook Section — animación scroll-driven en desktop, mockup estático en mobile
+5. FAQ
+6. Paquetes Web — Landing Esencial, Landing Pro, Sitio Profesional
+7. Portfolio — proyectos realizados
+8. Proceso — 5 pasos: idea → contenido → desarrollo → publicación → mantenimiento
+9. Servicios PC — bento grid
+10. Atención Personalizada
+11. Por Qué Kernel
+12. Contacto — info + formulario
+13. Footer
 
-### Requisitos
+---
 
-- Node.js 18+
-- npm o pnpm
+## Variables de entorno
 
-### Comandos
+```bash
+RESEND_API_KEY=re_...
+```
+
+Configurar en `.env` para desarrollo local y en **Vercel → Settings → Environment Variables** para producción.
+
+---
+
+## Instalación y desarrollo
 
 ```bash
 # Instalar dependencias
 npm install
 
-# Ejecutar en desarrollo
-npm run dev
+# Desarrollo local
+npm run dev         # http://localhost:4321
 
-# Build para producción
+# Build
 npm run build
 
 # Preview del build
 npm run preview
 ```
 
-## Configuración del Formulario
+---
 
-El formulario usa **FormSubmit** para enviar mensajes a `kernel.tech.rosario@gmail.com`.
+## SEO
 
-**Primera vez:**
-
-1. Enviar un mensaje de prueba
-2. Revisar el email de verificación
-3. Confirmar el link que llega
-
-## Paleta de Colores
-
-```css
---bg-primary: #0a0a0a      /* Fondo principal */
---bg-secondary: #1a1a1a    /* Fondo secundario */
---accent: #00ff88          /* Verde neón (principal) */
---accent-dim: #00cc6e      /* Verde oscuro */
---text-primary: #ffffff    /* Texto principal */
---text-muted: #999999      /* Texto secundario */
-```
-
-## Principios de Desarrollo
-
-- Single Responsibility - Cada componente tiene una única función
-- TypeScript estricto con tipos bien definidos
-- Progressive enhancement - Contenido visible sin JS, animaciones como mejora
-- Early returns para reducir anidamiento
-- Funciones pequeñas y reutilizables
-- Manejo robusto de errores
-
-## Licencia
-
-© 2025 Kernel. Todos los derechos reservados.
+- JSON-LD `LocalBusiness` con dirección, redes, serviceType y areaServed
+- Open Graph + Twitter Card
+- Sitemap automático via `@astrojs/sitemap`
+- Canonical URL dinámica
+- Favicon completo (ico, svg, png, webmanifest)
+- Verificación Google Search Console incluida
 
 ---
 
-**Desarrollado con Astro**
+## Paleta de colores
+
+```css
+--bg-primary: #0a0a0a /* Fondo principal */ --bg-secondary: #1a1a1a
+  /* Fondo secundario */ --accent: #00ff88 /* Verde neón */
+  --accent-dim: #00cc6e /* Verde oscuro */ --text-primary: #ffffff
+  /* Texto principal */ --text-muted: #999999 /* Texto secundario */;
+```
+
+---
+
+## Principios de desarrollo
+
+- **Single Responsibility** — cada componente tiene una única función
+- **Progressive enhancement** — contenido visible sin JS, animaciones como mejora
+- **TypeScript estricto** — tipos bien definidos en componentes y utilities
+- **Mobile-first** — diseño responsive desde mobile hacia arriba
+
+---
+
+© 2025 Kernel. Todos los derechos reservados.
