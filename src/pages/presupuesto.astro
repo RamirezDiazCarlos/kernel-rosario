@@ -93,8 +93,15 @@ const funcionesOpciones = [
               </div>
 
               <div class="form-group form-group--full">
-                <label for="cliente-ideal">¿Quién es tu cliente ideal?</label>
-                <textarea id="cliente-ideal" name="clienteIdeal" rows="2" placeholder="Ej: Dueños de pymes de 35–55 años que buscan renovar su imagen."></textarea>
+                <label>¿Tenés hosting contratado? <span class="optional">(opcional)</span></label>
+                <div class="radio-group">
+                  {["Sí, ya tengo hosting", "No, necesito ayuda con eso", "No sé qué es eso"].map(op => (
+                    <label class="radio-chip">
+                      <input type="radio" name="hosting" value={op} />
+                      <span>{op}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
 
             </div>
@@ -164,6 +171,18 @@ const funcionesOpciones = [
               </div>
 
               <div class="form-group form-group--full">
+                <label>¿Cómo querés que te contacten tus clientes? <span class="optional">(opcional)</span></label>
+                <div class="radio-group">
+                  {["Por WhatsApp", "Por formulario de contacto", "Por email", "Con sistema de turnos/reservas"].map(op => (
+                    <label class="radio-chip">
+                      <input type="radio" name="contactoClientes" value={op} />
+                      <span>{op}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div class="form-group form-group--full">
                 <label>¿Cuál es el objetivo principal del sitio? <span class="required">*</span></label>
                 <div class="radio-group">
                   {[
@@ -220,8 +239,15 @@ const funcionesOpciones = [
               </div>
 
               <div class="form-group form-group--full">
-                <label for="animaciones">¿Alguna animación o efecto visual en particular? <span class="optional">(opcional)</span></label>
-                <textarea id="animaciones" name="animaciones" rows="2" placeholder="Ej: Me gustan los parallax, las transiciones suaves, que las secciones aparezcan al hacer scroll..."></textarea>
+                <label>¿Necesitás poder editar el contenido vos mismo? <span class="required">*</span></label>
+                <div class="radio-group">
+                  {["Sí, quiero un panel para editar solo", "No, te aviso cuando necesite cambios", "No sé aún"].map(op => (
+                    <label class="radio-chip">
+                      <input type="radio" name="cms" value={op} required />
+                      <span>{op}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
 
             </div>
@@ -237,10 +263,10 @@ const funcionesOpciones = [
                 <div class="select-wrapper">
                   <select id="presupuesto" name="presupuesto">
                     <option value="" disabled selected>Seleccioná un rango</option>
-                    <option value="Menos de $200.000">Menos de $200.000</option>
-                    <option value="$200.000 – $500.000">$200.000 – $500.000</option>
-                    <option value="$500.000 – $1.000.000">$500.000 – $1.000.000</option>
-                    <option value="Más de $1.000.000">Más de $1.000.000</option>
+                    <option value="Menos de $200 USD">Menos de $200 USD</option>
+                    <option value="$200 – $500 USD">$200 – $500 USD</option>
+                    <option value="$500 – $1.000 USD">$500 – $1.000 USD</option>
+                    <option value="Más de $1.000 USD">Más de $1.000 USD</option>
                     <option value="A definir">A definir / No sé aún</option>
                   </select>
                   <svg class="select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
