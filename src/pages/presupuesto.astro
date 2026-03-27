@@ -10,11 +10,13 @@ const estilosOpciones = [
 const seccionesOpciones = [
   "Inicio", "Quiénes somos", "Servicios", "Galería de fotos",
   "Portfolio", "Testimonios", "Blog / Noticias", "Preguntas frecuentes", "Contacto",
+  "Catálogo de productos", "Carrito / Checkout",
 ];
 
 const funcionesOpciones = [
   "Formulario de contacto", "Mapa interactivo", "Sistema de turnos / reservas",
   "Buscador interno", "Tienda online", "Blog / CMS", "Chat o WhatsApp flotante",
+  "Pasarela de pagos", "Gestión de stock",
 ];
 ---
 
@@ -107,6 +109,74 @@ const funcionesOpciones = [
             </div>
           </div>
 
+          <!-- SECCIÓN E-COMMERCE (visible solo si tipo = Tienda online) -->
+          <div id="seccion-ecommerce" class="form-section" style="display:none">
+            <div class="form-section-label">1b — Tu tienda online</div>
+            <div class="form-grid">
+
+              <div class="form-group form-group--full">
+                <label>¿Cuántos productos aproximadamente vas a cargar? <span class="optional">(opcional)</span></label>
+                <div class="radio-group">
+                  {["Menos de 20", "Entre 20 y 100", "Más de 100", "No sé aún"].map(op => (
+                    <label class="radio-chip">
+                      <input type="radio" name="ecommerce_cantidad" value={op} />
+                      <span>{op}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div class="form-group form-group--full">
+                <label>¿Los productos tienen variantes? <span class="optional">(opcional)</span></label>
+                <div class="radio-group">
+                  {["Sí (talles, colores, modelos...)", "No, cada producto es único"].map(op => (
+                    <label class="radio-chip">
+                      <input type="radio" name="ecommerce_variantes" value={op} />
+                      <span>{op}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div class="form-group form-group--full">
+                <label>¿Qué medios de pago querés ofrecer? <span class="optional">(podés elegir varios)</span></label>
+                <div class="chips-group">
+                  {["MercadoPago", "Transferencia bancaria", "Tarjeta de crédito/débito", "Otro"].map(op => (
+                    <label class="chip">
+                      <input type="checkbox" name="ecommerce_pagos" value={op} />
+                      <span>{op}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div class="form-group form-group--full">
+                <label>¿Hacés envíos? <span class="optional">(opcional)</span></label>
+                <div class="radio-group">
+                  {["Sí, con correo (Andreani, OCA, etc.)", "Sí, entrega propia o local", "No hago envíos"].map(op => (
+                    <label class="radio-chip">
+                      <input type="radio" name="ecommerce_envios" value={op} />
+                      <span>{op}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div class="form-group form-group--full">
+                <label>¿El stock de productos cambia seguido? <span class="optional">(opcional)</span></label>
+                <div class="radio-group">
+                  {["Sí, agrego y quito productos frecuentemente", "No, los productos son siempre los mismos"].map(op => (
+                    <label class="radio-chip">
+                      <input type="radio" name="ecommerce_stock" value={op} />
+                      <span>{op}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
           <!-- SECCIÓN 2: ESTÉTICA -->
           <div class="form-section">
             <div class="form-section-label">2 — Estética y branding</div>
@@ -171,11 +241,11 @@ const funcionesOpciones = [
               </div>
 
               <div class="form-group form-group--full">
-                <label>¿Cómo querés que te contacten tus clientes? <span class="optional">(opcional)</span></label>
-                <div class="radio-group">
+                <label>¿Cómo querés que te contacten tus clientes? <span class="optional">(podés elegir varios)</span></label>
+                <div class="chips-group">
                   {["Por WhatsApp", "Por formulario de contacto", "Por email", "Con sistema de turnos/reservas"].map(op => (
-                    <label class="radio-chip">
-                      <input type="radio" name="contactoClientes" value={op} />
+                    <label class="chip">
+                      <input type="checkbox" name="contactoClientes" value={op} />
                       <span>{op}</span>
                     </label>
                   ))}
@@ -336,6 +406,51 @@ const funcionesOpciones = [
 </Layout>
 
 <script>
+  // Mostrar/ocultar sección e-commerce y actualizar opciones de presupuesto según tipo de proyecto
+  const tipoRadios = document.querySelectorAll<HTMLInputElement>('input[name="tipo"]');
+  const seccionEcommerce = document.getElementById("seccion-ecommerce") as HTMLElement;
+  const selectPresupuesto = document.getElementById("presupuesto") as HTMLSelectElement;
+
+  const opcionesPresupuestoBase = [
+    { value: "", label: "Seleccioná un rango", disabled: true },
+    { value: "Menos de $200 USD", label: "Menos de $200 USD" },
+    { value: "$200 – $500 USD", label: "$200 – $500 USD" },
+    { value: "$500 – $1.000 USD", label: "$500 – $1.000 USD" },
+    { value: "Más de $1.000 USD", label: "Más de $1.000 USD" },
+    { value: "A definir", label: "A definir / No sé aún" },
+  ];
+
+  const opcionesPresupuestoEcommerce = [
+    { value: "", label: "Seleccioná un rango", disabled: true },
+    { value: "Menos de $600 USD", label: "Menos de $600 USD" },
+    { value: "$600 – $1.000 USD", label: "$600 – $1.000 USD" },
+    { value: "$1.000 – $2.000 USD", label: "$1.000 – $2.000 USD" },
+    { value: "Más de $2.000 USD", label: "Más de $2.000 USD" },
+    { value: "A definir", label: "A definir / No sé aún" },
+  ];
+
+  function setOpcionesPresupuesto(opciones: typeof opcionesPresupuestoBase) {
+    selectPresupuesto.innerHTML = "";
+    opciones.forEach(op => {
+      const option = document.createElement("option");
+      option.value = op.value;
+      option.textContent = op.label;
+      if (op.disabled) {
+        option.disabled = true;
+        option.selected = true;
+      }
+      selectPresupuesto.appendChild(option);
+    });
+  }
+
+  tipoRadios.forEach(radio => {
+    radio.addEventListener("change", () => {
+      const esEcommerce = radio.value === "Tienda online";
+      seccionEcommerce.style.display = esEcommerce ? "flex" : "none";
+      setOpcionesPresupuesto(esEcommerce ? opcionesPresupuestoEcommerce : opcionesPresupuestoBase);
+    });
+  });
+
   // Mostrar/ocultar campo de colores según branding seleccionado
   const brandingRadios = document.querySelectorAll<HTMLInputElement>('input[name="branding"]');
   const coloresField = document.getElementById("colores-field") as HTMLElement;
