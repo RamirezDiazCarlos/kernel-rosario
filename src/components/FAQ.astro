@@ -53,7 +53,7 @@ const faqs = [
     <div class="faq-list animate-on-scroll">
       {
         faqs.map((faq, i) => (
-          <details class="faq-item" name="faq">
+          <details class="faq-item">
             <summary class="faq-question">
               <span class="faq-number">{String(i + 1).padStart(2, "0")}</span>
               <span class="faq-question-text">{faq.pregunta}</span>
@@ -260,3 +260,16 @@ const faqs = [
     }
   }
 </style>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.pregunta,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.respuesta
+    }
+  }))
+})} />

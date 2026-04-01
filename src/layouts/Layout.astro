@@ -52,42 +52,35 @@ const ogImage = new URL(image, Astro.site);
       "url": "https://www.kerneldev.com.ar",
       "logo": {
         "@type": "ImageObject",
-        "url": `https://www.kerneldev.com.ar/og-image.jpg`,
-        "width": 1200,
-        "height": 630
+        "url": "https://www.kerneldev.com.ar/favicon/favicon-96x96.png",
+        "width": 96,
+        "height": 96
       },
-      "image": `https://www.kerneldev.com.ar/og-image.jpg`,
+      "image": "https://www.kerneldev.com.ar/og-image.jpg",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Rosario",
         "addressRegion": "Santa Fe",
         "addressCountry": "AR"
       },
-      "areaServed": "Rosario, Argentina",
-      "serviceType": ["Desarrollo web", "Landing pages", "Sitios corporativos", "E-commerce a medida", "Rediseño web", "SEO", "Reparación de PC"],
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -32.9468,
+        "longitude": -60.6393
+      },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "09:00",
+        "closes": "20:00"
+      }],
+      "areaServed": ["Argentina", "Uruguay", "Chile", "México", "Colombia", "España"],
+      "serviceType": ["Diseño web", "Desarrollo web", "Landing pages", "Sitios corporativos", "E-commerce", "Rediseño web", "SEO", "Reparación de PC", "Soporte técnico"],
       "sameAs": [
         "https://www.instagram.com/kernelrosario",
         "https://www.facebook.com/share/1C7qtibxwS/"
       ]
     })} />
-
-    <!-- Preconnect para fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Fonts optimizadas -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
 
     <title>{title}</title>
 
@@ -114,21 +107,20 @@ const ogImage = new URL(image, Astro.site);
         --bg-primary: #0a0a0a;
         --bg-secondary: #1a1a1a;
         --bg-tertiary: #252525;
-        --accent: #00ff88;
-        --accent-dim: #00cc6e;
+        --accent: #2de890;
+        --accent-dim: #1abf75;
         --text-primary: #ffffff;
         --text-secondary: #e5e5e5;
         --text-muted: #999999;
         --border: rgba(255, 255, 255, 0.1);
-        --border-hover: rgba(0, 255, 136, 0.3);
+        --border-hover: rgba(45, 232, 144, 0.35);
 
-        --font-display: "Sora", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-display: "Geist Variable", "Sora", -apple-system, BlinkMacSystemFont, sans-serif;
         --font-mono: "Departure Mono", "Courier New", monospace;
 
         --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
         --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
         --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
-        --shadow-glow: 0 0 30px rgba(0, 255, 136, 0.2);
 
         --radius-sm: 8px;
         --radius-md: 12px;
