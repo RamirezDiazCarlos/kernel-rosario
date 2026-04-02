@@ -37,25 +37,70 @@
 
       <!-- Columna derecha: visual -->
       <div class="hero-visual" aria-hidden="true">
-        <div class="visual-card card-1">
-          <div class="card-dot"></div>
-          <div class="card-line"></div>
-          <div class="card-line card-line--short"></div>
+
+        <!-- Card principal: PageSpeed -->
+        <div class="visual-card card-speed">
+          <div class="speed-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            PageSpeed
+          </div>
+          <div class="speed-score">98</div>
+          <div class="speed-bar">
+            <div class="speed-bar-fill"></div>
+          </div>
+          <div class="speed-sub">rendimiento / 100</div>
         </div>
-        <div class="visual-card card-2">
-          <div class="card-dot card-dot--accent"></div>
-          <div class="card-line"></div>
-          <div class="card-line card-line--short"></div>
+
+        <!-- Card secundaria: Lighthouse audit -->
+        <div class="visual-card card-lighthouse">
+          <div class="lh-header">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            Lighthouse
+          </div>
+          <div class="lh-rows">
+            <div class="lh-row">
+              <span class="lh-label">Performance</span>
+              <div class="lh-bar-wrap"><div class="lh-bar" style="width:98%"></div></div>
+              <span class="lh-val">98</span>
+            </div>
+            <div class="lh-row">
+              <span class="lh-label">Accessibility</span>
+              <div class="lh-bar-wrap"><div class="lh-bar" style="width:100%"></div></div>
+              <span class="lh-val">100</span>
+            </div>
+            <div class="lh-row">
+              <span class="lh-label">SEO</span>
+              <div class="lh-bar-wrap"><div class="lh-bar" style="width:95%"></div></div>
+              <span class="lh-val">95</span>
+            </div>
+            <div class="lh-row">
+              <span class="lh-label">Best Practices</span>
+              <div class="lh-bar-wrap"><div class="lh-bar" style="width:100%"></div></div>
+              <span class="lh-val">100</span>
+            </div>
+          </div>
         </div>
-        <div class="visual-card card-3">
-          <div class="card-dot"></div>
-          <div class="card-line"></div>
-          <div class="card-line card-line--mid"></div>
-        </div>
+
+        <!-- Badge: entregas -->
         <div class="visual-badge">
           <span class="badge-pulse"></span>
           <span>Online 24hs</span>
         </div>
+
+        <!-- Card terciaria: uptime -->
+        <div class="visual-card card-uptime">
+          <div class="uptime-row">
+            <span class="uptime-dot"></span>
+            <span class="uptime-text">Sitio activo</span>
+          </div>
+          <div class="uptime-bars">
+            {Array.from({length: 28}).map((_, i) => (
+              <span class={`uptime-bar ${i === 5 || i === 12 ? 'uptime-bar--low' : ''}`}></span>
+            ))}
+          </div>
+          <div class="uptime-val">99.9% uptime</div>
+        </div>
+
       </div>
 
     </div>
@@ -220,7 +265,7 @@
   /* Visual derecho */
   .hero-visual {
     position: relative;
-    height: 360px;
+    height: 380px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -231,75 +276,203 @@
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 20px 24px;
+  }
+
+  /* Card PageSpeed */
+  .card-speed {
+    width: 200px;
+    top: 10px;
+    right: 16px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-
-  .card-1 {
-    width: 200px;
-    top: 20px;
-    right: 20px;
     animation: float 6s ease-in-out infinite;
   }
 
-  .card-2 {
-    width: 180px;
-    top: 130px;
-    left: 10px;
-    animation: float 7s ease-in-out infinite 1s;
+  .speed-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
   }
 
-  .card-3 {
-    width: 160px;
-    bottom: 30px;
-    right: 40px;
+  .speed-score {
+    font-size: 52px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .speed-bar {
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .speed-bar-fill {
+    height: 100%;
+    width: 98%;
+    background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+    border-radius: 2px;
+  }
+
+  .speed-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  /* Card Lighthouse */
+  .card-lighthouse {
+    width: 210px;
+    top: 140px;
+    left: 0;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: float 7s ease-in-out infinite 1.2s;
+  }
+
+  .lh-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .lh-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .lh-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 28px;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lh-label {
+    font-size: 10px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lh-bar-wrap {
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .lh-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+    border-radius: 2px;
+  }
+
+  .lh-val {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--accent);
+    text-align: right;
+  }
+
+  /* Card uptime */
+  .card-uptime {
+    width: 195px;
+    bottom: 20px;
+    right: 28px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     animation: float 8s ease-in-out infinite 2s;
   }
 
-  .card-dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--border);
+  .uptime-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .card-dot--accent {
-    background: rgba(45, 232, 144, 0.2);
-    border: 1px solid var(--accent);
-  }
-
-  .card-line {
+  .uptime-dot {
+    width: 8px;
     height: 8px;
-    background: var(--border);
-    border-radius: 4px;
-    width: 100%;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
   }
 
-  .card-line--short { width: 60%; }
-  .card-line--mid  { width: 75%; }
+  .uptime-text {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+  }
 
+  .uptime-bars {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 24px;
+  }
+
+  .uptime-bar {
+    flex: 1;
+    height: 100%;
+    background: rgba(45, 232, 144, 0.4);
+    border-radius: 1px;
+  }
+
+  .uptime-bar--low {
+    height: 35%;
+    background: rgba(45, 232, 144, 0.15);
+  }
+
+  .uptime-val {
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--accent);
+  }
+
+  /* Badge Online */
   .visual-badge {
     position: absolute;
-    bottom: 60px;
-    left: 30px;
+    top: 175px;
+    right: 10px;
     display: flex;
     align-items: center;
     gap: 8px;
     background: var(--bg-tertiary);
     border: 1px solid var(--border-hover);
     border-radius: var(--radius-lg);
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 8px 14px;
+    font-size: 12px;
     font-family: var(--font-mono);
     color: var(--accent);
     animation: float 5s ease-in-out infinite 0.5s;
   }
 
   .badge-pulse {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: var(--accent);
     animation: pulse 2s ease-in-out infinite;

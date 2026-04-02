@@ -11,6 +11,7 @@ interface Paquete {
   readonly nombre: string;
   readonly subtitulo: string;
   readonly descripcion: string;
+  readonly desde: string;
   readonly features: ReadonlyArray<PaqueteFeature>;
   readonly mantenimiento: ReadonlyArray<PaqueteMantenimiento>;
   readonly destacado?: boolean;
@@ -20,6 +21,7 @@ const paquetes: ReadonlyArray<Paquete> = [
   {
     nombre: 'Landing Esencial',
     subtitulo: 'Ideal para empezar a recibir consultas',
+    desde: '$350 USD',
     descripcion: 'Una página simple y profesional para que te encuentren, entiendan lo que ofrecés y te contacten sin vueltas.',
     features: [
       { text: '1 página tipo "scroll" con secciones claras: presentación, servicios, beneficios, preguntas frecuentes y contacto' },
@@ -38,6 +40,7 @@ const paquetes: ReadonlyArray<Paquete> = [
   {
     nombre: 'Landing Pro',
     subtitulo: 'Para convertir visitas en clientes',
+    desde: '$500 USD',
     descripcion: 'Para profesionales que quieren una web pensada para que la gente entienda, confíe y termine consultando.',
     features: [
       { text: 'Todo lo del Esencial incluido' },
@@ -57,6 +60,7 @@ const paquetes: ReadonlyArray<Paquete> = [
   {
     nombre: 'Sitio Profesional',
     subtitulo: '3 a 6 páginas + SEO local',
+    desde: '$600 USD',
     descripcion: 'Si tenés varios servicios, querés mostrar portfolio, o necesitás que cada tema tenga su propia página para posicionar mejor.',
     features: [
       { text: 'Entre 3 y 6 páginas (Inicio, Servicios, Sobre mí, Portfolio, FAQ, Contacto)' },
@@ -99,7 +103,8 @@ const paquetes: ReadonlyArray<Paquete> = [
           <p class="paquete-descripcion">{paquete.descripcion}</p>
 
           <div class="paquete-precio">
-            <span class="precio-texto">Precio a consultar</span>
+            <span class="precio-desde">desde</span>
+            <span class="precio-valor">{paquete.desde}</span>
           </div>
 
           <div class="paquete-features">
@@ -271,18 +276,29 @@ const paquetes: ReadonlyArray<Paquete> = [
   }
 
   .paquete-precio {
-    padding: 16px;
+    padding: 16px 20px;
     background: var(--bg-tertiary);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    text-align: center;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
   }
 
-  .precio-texto {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-secondary);
+  .precio-desde {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
     font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+  }
+
+  .precio-valor {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    line-height: 1;
   }
 
   .paquete-features,
@@ -361,7 +377,7 @@ const paquetes: ReadonlyArray<Paquete> = [
 
   .cta-secondary:hover {
     border-color: var(--accent);
-    background: rgba(0, 255, 136, 0.05);
+    background: rgba(45, 232, 144, 0.05);
   }
 
   .paquete-cta svg {
