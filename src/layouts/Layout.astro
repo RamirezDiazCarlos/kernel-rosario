@@ -11,7 +11,7 @@ interface Props {
 const {
   title = "Kernel | Diseño y Desarrollo Web a Medida",
   description = "Diseñamos y desarrollamos sitios web a medida según las necesidades de tu negocio, para que tus clientes te encuentren.",
-  image = "/og-image.jpg",
+  image = "/og-image.png",
 } = Astro.props;
 
 const ogImage = new URL(image, Astro.site);
@@ -34,16 +34,87 @@ const ogImage = new URL(image, Astro.site);
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:site_name" content="Kernel" />
     <meta property="og:locale" content="es_AR" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@kernelrosario" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Datos estructurados (JSON-LD) -->
+    <!-- Service schema -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify([
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Diseño y Desarrollo Web",
+        "name": "Desarrollo Web Profesional",
+        "description": "Diseñamos y desarrollamos sitios web a medida: landing pages, sitios corporativos y tiendas online. Optimizados para velocidad, SEO y conversión.",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Kernel",
+          "url": "https://www.kerneldev.com.ar"
+        },
+        "areaServed": ["Argentina", "Uruguay", "Chile", "México", "Colombia", "España"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Paquetes de desarrollo web",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Landing Esencial",
+                "description": "Una página profesional para que te encuentren, entiendan lo que ofrecés y te contacten."
+              },
+              "priceCurrency": "USD",
+              "priceSpecification": { "@type": "PriceSpecification", "minPrice": 350 }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Landing Pro",
+                "description": "Landing page orientada a conversión con SEO completo y medición de resultados."
+              },
+              "priceCurrency": "USD",
+              "priceSpecification": { "@type": "PriceSpecification", "minPrice": 500 }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Sitio Profesional",
+                "description": "Sitio multipágina de 3 a 6 páginas con SEO local y estructura escalable."
+              },
+              "priceCurrency": "USD",
+              "priceSpecification": { "@type": "PriceSpecification", "minPrice": 600 }
+            }
+          ]
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Soporte Técnico y Reparación de PC",
+        "name": "Reparación y Armado de PC",
+        "description": "Reparación de notebooks y PCs, instalación de software, recuperación de datos, mantenimiento preventivo y armado a medida.",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Kernel",
+          "url": "https://www.kerneldev.com.ar"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Rosario, Santa Fe, Argentina"
+        }
+      }
+    ])} />
+
+    <!-- LocalBusiness schema -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
@@ -56,7 +127,7 @@ const ogImage = new URL(image, Astro.site);
         "width": 96,
         "height": 96
       },
-      "image": "https://www.kerneldev.com.ar/og-image.jpg",
+      "image": "https://www.kerneldev.com.ar/og-image.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Rosario",

@@ -5,25 +5,35 @@
 <section class="hero">
   <div class="container">
     <div class="hero-layout">
-
       <!-- Columna izquierda: texto -->
       <div class="hero-content">
-        <span class="hero-eyebrow animate-on-scroll">DISEÑO &amp; DESARROLLO WEB</span>
+        <span class="hero-eyebrow animate-on-scroll"
+          >DISEÑO WEB · SIN PLANTILLAS · A MEDIDA</span
+        >
 
         <h1 class="hero-title animate-on-scroll">
-          Creamos la web<br />
+          Desarrollo web<br />
           que tu negocio<br />
           <span class="flip-word gradient-text" id="flip-word">necesita</span>
         </h1>
 
         <p class="hero-subtitle animate-on-scroll">
-          Webs profesionales y de alto rendimiento para que <strong class="highlight">te encuentren y te contacten</strong>.
-          Soporte en 24hs y mantenimiento incluido. También reparamos y armamos tu PC.
+          Webs profesionales y de alto rendimiento para que <strong
+            class="highlight">te encuentren y te contacten</strong
+          >. Soporte en 24hs y mantenimiento incluido. También reparamos y
+          armamos tu PC.
         </p>
 
         <div class="hero-ctas animate-on-scroll">
           <a href="/presupuesto" class="btn btn-primary">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <rect width="18" height="18" x="3" y="3" rx="2"></rect>
               <path d="M7 7h10"></path>
               <path d="M7 12h10"></path>
@@ -31,17 +41,27 @@
             </svg>
             Solicitar presupuesto web
           </a>
-          <a href="#servicios" class="btn btn-secondary">Ver todos los servicios</a>
+          <a href="#servicios" class="btn btn-secondary"
+            >Ver todos los servicios</a
+          >
         </div>
       </div>
 
       <!-- Columna derecha: visual -->
       <div class="hero-visual" aria-hidden="true">
-
         <!-- Card principal: PageSpeed -->
         <div class="visual-card card-speed">
           <div class="speed-label">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              ><circle cx="12" cy="12" r="10"></circle><polyline
+                points="12 6 12 12 16 14"></polyline></svg
+            >
             PageSpeed
           </div>
           <div class="speed-score">98</div>
@@ -54,28 +74,45 @@
         <!-- Card secundaria: Lighthouse audit -->
         <div class="visual-card card-lighthouse">
           <div class="lh-header">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+              ></path></svg
+            >
             Lighthouse
           </div>
           <div class="lh-rows">
             <div class="lh-row">
               <span class="lh-label">Performance</span>
-              <div class="lh-bar-wrap"><div class="lh-bar" style="width:98%"></div></div>
+              <div class="lh-bar-wrap">
+                <div class="lh-bar" style="width:98%"></div>
+              </div>
               <span class="lh-val">98</span>
             </div>
             <div class="lh-row">
               <span class="lh-label">Accessibility</span>
-              <div class="lh-bar-wrap"><div class="lh-bar" style="width:100%"></div></div>
+              <div class="lh-bar-wrap">
+                <div class="lh-bar" style="width:100%"></div>
+              </div>
               <span class="lh-val">100</span>
             </div>
             <div class="lh-row">
               <span class="lh-label">SEO</span>
-              <div class="lh-bar-wrap"><div class="lh-bar" style="width:95%"></div></div>
+              <div class="lh-bar-wrap">
+                <div class="lh-bar" style="width:95%"></div>
+              </div>
               <span class="lh-val">95</span>
             </div>
             <div class="lh-row">
               <span class="lh-label">Best Practices</span>
-              <div class="lh-bar-wrap"><div class="lh-bar" style="width:100%"></div></div>
+              <div class="lh-bar-wrap">
+                <div class="lh-bar" style="width:100%"></div>
+              </div>
               <span class="lh-val">100</span>
             </div>
           </div>
@@ -94,45 +131,48 @@
             <span class="uptime-text">Sitio activo</span>
           </div>
           <div class="uptime-bars">
-            {Array.from({length: 28}).map((_, i) => (
-              <span class={`uptime-bar ${i === 5 || i === 12 ? 'uptime-bar--low' : ''}`}></span>
-            ))}
+            {
+              Array.from({ length: 28 }).map((_, i) => (
+                <span
+                  class={`uptime-bar ${i === 5 || i === 12 ? "uptime-bar--low" : ""}`}
+                />
+              ))
+            }
           </div>
           <div class="uptime-val">99.9% uptime</div>
         </div>
-
       </div>
-
     </div>
   </div>
 </section>
 
 <script>
-  const words = ['necesita', 'merece', 'busca', 'proyecta'];
+  const words = ["necesita", "merece", "busca", "proyecta"];
   let index = 0;
-  const wordEl = document.getElementById('flip-word') as HTMLElement | null;
+  const wordEl = document.getElementById("flip-word") as HTMLElement | null;
 
   if (wordEl) {
     setInterval(() => {
       // Fase 1: fade out + sube levemente
-      wordEl.style.opacity = '0';
-      wordEl.style.transform = 'translateY(-6px)';
+      wordEl.style.opacity = "0";
+      wordEl.style.transform = "translateY(-6px)";
 
       setTimeout(() => {
         index = (index + 1) % words.length;
         wordEl.textContent = words[index];
 
         // Posicionar abajo sin transición
-        wordEl.style.transition = 'none';
-        wordEl.style.opacity = '0';
-        wordEl.style.transform = 'translateY(8px)';
+        wordEl.style.transition = "none";
+        wordEl.style.opacity = "0";
+        wordEl.style.transform = "translateY(8px)";
 
         // Fase 2: fade in + sube al lugar
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            wordEl.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-            wordEl.style.opacity = '1';
-            wordEl.style.transform = 'translateY(0)';
+            wordEl.style.transition =
+              "opacity 0.45s ease, transform 0.45s ease";
+            wordEl.style.opacity = "1";
+            wordEl.style.transform = "translateY(0)";
           });
         });
       }, 350);
@@ -188,11 +228,17 @@
   /* Flip word */
   .flip-word {
     display: inline-block;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-dim) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -480,13 +526,23 @@
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-12px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.4; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
   }
 
   /* Responsive */
