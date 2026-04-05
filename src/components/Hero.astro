@@ -20,8 +20,7 @@
         <p class="hero-subtitle animate-on-scroll">
           Webs profesionales y de alto rendimiento para que <strong
             class="highlight">te encuentren y te contacten</strong
-          >. Soporte en 24hs y mantenimiento incluido. También reparamos y
-          armamos tu PC.
+          >. Diseño a medida, soporte en 24hs y mantenimiento incluido.
         </p>
 
         <div class="hero-ctas animate-on-scroll">
@@ -41,7 +40,7 @@
             </svg>
             Solicitar presupuesto web
           </a>
-          <a href="#servicios" class="btn btn-secondary"
+          <a href="#paquetes" class="btn btn-secondary"
             >Ver todos los servicios</a
           >
         </div>
@@ -560,6 +559,23 @@
   @media (max-width: 768px) {
     .hero {
       padding: 80px 0 60px;
+    }
+
+    /* Gradiente ambiental que reemplaza el visual en mobile */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(
+        circle,
+        rgba(45, 232, 144, 0.06) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 0;
     }
 
     .hero-visual {

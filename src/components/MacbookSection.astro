@@ -1,127 +1,263 @@
 ---
 import MacbookShowcase from "./MacbookShowcase.tsx";
+
+const capabilities = [
+  { label: "Animaciones fluidas", icon: "M13 10V3L4 14h7v7l9-11h-7z", metrica: "60fps garantizados" },
+  { label: "Diseño responsive", icon: "M12 18H12.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z", metrica: "Todos los dispositivos" },
+  { label: "Carga ultrarrápida", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8z", metrica: "Score 95+ PageSpeed" },
+  { label: "SEO optimizado", icon: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z", metrica: "Posicionamiento real" },
+  { label: "Formularios y CTA", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", metrica: "Más consultas entrantes" },
+  { label: "Integración WhatsApp", icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", metrica: "Contacto en 1 clic" },
+];
 ---
 
 <section class="macbook-section">
-  <!-- Animación scroll: solo desktop -->
+
+  <!-- Fondos atmosféricos -->
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <div class="container">
+    <header class="macbook-header animate-on-scroll">
+      <span class="section-tag">CAPACIDADES</span>
+      <p class="macbook-kicker">
+        Cada detalle importa. Cada interacción, pensada.
+      </p>
+    </header>
+
+    <!-- Pills -->
+    <div class="capabilities-strip animate-on-scroll">
+      {capabilities.map((cap, i) => (
+        <div class="cap-pill" style={`animation-delay: ${i * 0.08}s`}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+            <path d={cap.icon} />
+          </svg>
+          <span>{cap.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- MacBook scroll — desktop -->
   <div class="macbook-animated">
     <MacbookShowcase client:visible />
   </div>
 
-  <!-- Mockup estático: solo mobile -->
+  <!-- Feature cards — mobile -->
   <div class="macbook-static">
-    <p class="static-title">Tu negocio, online y profesional.</p>
-    <div class="mac-frame">
-      <div class="mac-screen">
-        <img src="/tuNegocio2.webp" alt="Ejemplo de sitio web profesional" />
+    <div class="container">
+      <div class="feature-grid">
+        {capabilities.map((cap, i) => (
+          <div class="feature-card animate-on-scroll" style={`animation-delay: ${i * 0.07}s`}>
+            <div class="feature-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d={cap.icon} />
+              </svg>
+            </div>
+            <div class="feature-card-body">
+              <span class="feature-card-label">{cap.label}</span>
+              <span class="feature-card-metrica">{cap.metrica}</span>
+            </div>
+          </div>
+        ))}
       </div>
-      <div class="mac-notch"></div>
-      <div class="mac-base">
-        <div class="mac-keyboard"></div>
-      </div>
-      <div class="mac-foot"></div>
     </div>
   </div>
+
 </section>
 
 <style>
   .macbook-section {
     position: relative;
-    background: var(--bg-primary);
+    padding: 100px 0 0;
     overflow: hidden;
+    background: var(--bg-primary);
   }
 
-  /* Desktop: animación */
+  /* ── Fondos ── */
+  .bg-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse at center,
+      rgba(45, 232, 144, 0.07) 0%,
+      rgba(45, 232, 144, 0.02) 50%,
+      transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Header ── */
+  .macbook-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    padding: 6px 18px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+  }
+
+  .macbook-kicker {
+    font-size: clamp(14px, 1.4vw, 17px);
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+
+  /* ── Pills ── */
+  .capabilities-strip {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .cap-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    transition: border-color var(--transition), color var(--transition);
+    animation: pill-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .cap-pill svg { color: var(--accent); flex-shrink: 0; }
+  .cap-pill:hover { border-color: var(--border-hover); color: var(--text-secondary); }
+
+  @keyframes pill-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Desktop: MacBook animado ── */
   .macbook-animated {
     display: none;
-  }
-
-  /* Mobile: mockup estático */
-  .macbook-static {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 24px 40px;
-    gap: 32px;
-  }
-
-  .static-title {
-    font-size: clamp(20px, 5vw, 28px);
-    font-weight: 700;
-    color: var(--text-primary);
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  /* MacBook frame */
-  .mac-frame {
-    width: 100%;
-    max-width: 380px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .mac-screen {
-    width: 100%;
-    background: #1a1a1a;
-    border-radius: 10px 10px 0 0;
-    border: 6px solid #2a2a2a;
-    border-bottom: none;
-    overflow: hidden;
-    position: relative;
-    box-shadow:
-      0 0 0 1px #111,
-      0 20px 60px rgba(0, 0, 0, 0.6);
-  }
-
-  .mac-screen img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .mac-notch {
-    width: 60px;
-    height: 6px;
-    background: #2a2a2a;
-    border-radius: 0 0 4px 4px;
-    margin: 0 auto;
     position: relative;
     z-index: 1;
   }
 
-  .mac-base {
-    width: 106%;
-    height: 14px;
-    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-    border-radius: 0 0 4px 4px;
+  /* ── Mobile: feature cards ── */
+  .macbook-static {
+    display: none;
+    padding: 40px 0 0;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .feature-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 18px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--transition);
+  }
+
+  .feature-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .feature-card-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--accent);
   }
 
-  .mac-keyboard {
-    width: 40%;
-    height: 4px;
-    background: #222;
-    border-radius: 2px;
+  .feature-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
   }
 
-  .mac-foot {
-    width: 112%;
-    height: 5px;
-    background: linear-gradient(180deg, #222 0%, #1a1a1a 100%);
-    border-radius: 0 0 8px 8px;
+  .feature-card-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
   }
 
+  .feature-card-metrica {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    opacity: 0.8;
+    line-height: 1.3;
+  }
+
+  /* ── Responsive ── */
   @media (min-width: 768px) {
-    .macbook-animated {
-      display: block;
-    }
-    .macbook-static {
-      display: none;
+    .macbook-animated { display: block; }
+    .macbook-static   { display: none; }
+  }
+
+  @media (max-width: 767px) {
+    .macbook-section { padding: 80px 0 48px; }
+    .macbook-static  { display: block; }
+    .cap-pill        { font-size: 11px; padding: 6px 11px; }
+    .capabilities-strip { gap: 6px; }
+  }
+
+  @media (max-width: 400px) {
+    .feature-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

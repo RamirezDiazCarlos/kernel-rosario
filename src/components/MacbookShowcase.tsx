@@ -8,8 +8,9 @@ export default function MacbookShowcase() {
         src="/tuNegocio2.webp"
         showGradient={false}
         title={
-          <span className="text-white">
-            Tu negocio, online y profesional.
+          <span style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+            No es una maqueta.<br />
+            <span style={{ color: "var(--accent)" }}>Es tu próxima web.</span>
           </span>
         }
       />

@@ -40,10 +40,18 @@ const ogImage = new URL(image, Astro.site);
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@kernelrosario" />
+    <meta name="twitter:site" content="@kernel.web" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <!-- WebSite schema -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kernel",
+      "url": "https://www.kerneldev.com.ar"
+    })} />
 
     <!-- Service schema -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify([
@@ -146,9 +154,9 @@ const ogImage = new URL(image, Astro.site);
         "closes": "20:00"
       }],
       "areaServed": ["Argentina", "Uruguay", "Chile", "México", "Colombia", "España"],
-      "serviceType": ["Diseño web", "Desarrollo web", "Landing pages", "Sitios corporativos", "E-commerce", "Rediseño web", "SEO", "Reparación de PC", "Soporte técnico"],
+      "serviceType": ["Diseño web", "Desarrollo web", "Landing pages", "Sitios corporativos", "E-commerce", "Rediseño web", "SEO"],
       "sameAs": [
-        "https://www.instagram.com/kernelrosario",
+        "https://www.instagram.com/kernel.web/",
         "https://www.facebook.com/share/1C7qtibxwS/"
       ]
     })} />
@@ -305,7 +313,15 @@ const ogImage = new URL(image, Astro.site);
       }
 
       .js-ready .animate-on-scroll.visible {
-        animation: fadeInUp 0.8s var(--transition) forwards;
+        animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
       }
 
       body::before {

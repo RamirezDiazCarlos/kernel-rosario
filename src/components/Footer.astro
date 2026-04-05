@@ -1,5 +1,5 @@
 ---
-const instagramUrl = "https://www.instagram.com/kernelrosario?igsh=bXJrazJlOGF6MjYy";
+const instagramUrl = "https://www.instagram.com/kernel.web/";
 const whatsappUrl = "https://wa.me/5493412250129";
 const emailUrl = "mailto:kernel.tech.rosario@gmail.com";
 const phoneUrl = "tel:+5493412250129";
@@ -38,7 +38,7 @@ const phoneUrl = "tel:+5493412250129";
           </svg>
           <span>KERNEL</span>
         </div>
-        <p class="footer-tagline">Desarrollo web y soporte técnico para toda Latinoamérica</p>
+        <p class="footer-tagline">Diseño y desarrollo web profesional para toda Latinoamérica</p>
       </div>
 
       <!-- Links -->
@@ -46,19 +46,10 @@ const phoneUrl = "tel:+5493412250129";
         <div class="link-column">
           <h3>Desarrollo Web</h3>
           <ul>
-            <li><a href="#desarrollo-web">Nuestro servicio</a></li>
-            <li><a href="#paquetes">Paquetes</a></li>
+            <li><a href="#paquetes">Servicios</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#proceso">Proceso</a></li>
-          </ul>
-        </div>
-
-        <div class="link-column">
-          <h3>Soporte PC</h3>
-          <ul>
-            <li><a href="#servicios">Reparación</a></li>
-            <li><a href="#servicios">Armado de PC</a></li>
-            <li><a href="#servicios">Diagnóstico</a></li>
+            <li><a href="#faq">Preguntas frecuentes</a></li>
+            <li><a href="/presupuesto">Presupuesto</a></li>
           </ul>
         </div>
 
@@ -112,22 +103,6 @@ const phoneUrl = "tel:+5493412250129";
       <p class="copyright">
         © {new Date().getFullYear()} Kernel. Todos los derechos reservados.
       </p>
-      <div class="footer-badge">
-        <span class="tech-badge">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
-          </svg>
-          Hecho con Astro
-        </span>
-      </div>
     </div>
   </div>
 </footer>
@@ -181,7 +156,7 @@ const phoneUrl = "tel:+5493412250129";
   /* Links */
   .footer-links {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px;
   }
 
@@ -282,8 +257,8 @@ const phoneUrl = "tel:+5493412250129";
     }
 
     .footer-links {
-      grid-template-columns: 1fr;
-      gap: 32px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 24px;
     }
 
     .footer-bottom {

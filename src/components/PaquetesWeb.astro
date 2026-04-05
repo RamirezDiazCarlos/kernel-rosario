@@ -135,8 +135,8 @@ const paquetes: ReadonlyArray<Paquete> = [
             </ul>
           </div>
 
-          <a href="#contacto" class={`paquete-cta ${paquete.destacado ? 'cta-primary' : 'cta-secondary'}`}>
-            Consultar precio
+          <a href="/presupuesto" class={`paquete-cta ${paquete.destacado ? 'cta-primary' : 'cta-secondary'}`}>
+            Quiero este plan
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <line x1="5" x2="19" y1="12" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -193,6 +193,7 @@ const paquetes: ReadonlyArray<Paquete> = [
     font-size: 18px;
     color: var(--text-secondary);
     line-height: 1.7;
+    max-width: 65ch;
   }
 
   .section-description strong {
