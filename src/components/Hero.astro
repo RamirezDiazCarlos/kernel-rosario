@@ -89,28 +89,28 @@
             <div class="lh-row">
               <span class="lh-label">Performance</span>
               <div class="lh-bar-wrap">
-                <div class="lh-bar" style="width:98%"></div>
+                <div class="lh-bar" style="--bar-target: 98%"></div>
               </div>
               <span class="lh-val">98</span>
             </div>
             <div class="lh-row">
               <span class="lh-label">Accessibility</span>
               <div class="lh-bar-wrap">
-                <div class="lh-bar" style="width:100%"></div>
+                <div class="lh-bar" style="--bar-target: 100%"></div>
               </div>
               <span class="lh-val">100</span>
             </div>
             <div class="lh-row">
               <span class="lh-label">SEO</span>
               <div class="lh-bar-wrap">
-                <div class="lh-bar" style="width:95%"></div>
+                <div class="lh-bar" style="--bar-target: 95%"></div>
               </div>
               <span class="lh-val">95</span>
             </div>
             <div class="lh-row">
               <span class="lh-label">Best Practices</span>
               <div class="lh-bar-wrap">
-                <div class="lh-bar" style="width:100%"></div>
+                <div class="lh-bar" style="--bar-target: 100%"></div>
               </div>
               <span class="lh-val">100</span>
             </div>
@@ -146,6 +146,26 @@
 </section>
 
 <script>
+  // Animar barras Lighthouse al entrar en viewport
+  const lhCard = document.querySelector('.card-lighthouse');
+  if (lhCard) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const bars = lhCard.querySelectorAll<HTMLElement>('.lh-bar');
+            bars.forEach((bar, i) => {
+              setTimeout(() => bar.classList.add('animated'), i * 120);
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(lhCard);
+  }
+
   const words = ["necesita", "merece", "busca", "proyecta"];
   let index = 0;
   const wordEl = document.getElementById("flip-word") as HTMLElement | null;
@@ -300,11 +320,32 @@
     background: transparent;
     color: var(--text-primary);
     border-color: var(--border);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .btn-secondary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-101%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
   }
 
   .btn-secondary:hover {
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--bg-primary);
+  }
+
+  .btn-secondary:hover::before {
+    transform: translateX(0);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0) scale(0.98);
   }
 
   /* Visual derecho */
@@ -326,8 +367,8 @@
   /* Card PageSpeed */
   .card-speed {
     width: 200px;
-    top: 10px;
-    right: 16px;
+    top: 0;
+    right: 0;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -426,8 +467,14 @@
 
   .lh-bar {
     height: 100%;
+    width: 0;
     background: linear-gradient(90deg, var(--accent-dim), var(--accent));
     border-radius: 2px;
+    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lh-bar.animated {
+    width: var(--bar-target);
   }
 
   .lh-val {
@@ -441,8 +488,8 @@
   /* Card uptime */
   .card-uptime {
     width: 195px;
-    bottom: 20px;
-    right: 28px;
+    bottom: 0;
+    right: 0;
     padding: 16px 18px;
     display: flex;
     flex-direction: column;
@@ -461,8 +508,17 @@
     height: 8px;
     border-radius: 50%;
     background: var(--accent);
-    animation: pulse 2s ease-in-out infinite;
     flex-shrink: 0;
+    position: relative;
+  }
+
+  .uptime-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    animation: ring-pulse 2s ease-out infinite;
   }
 
   .uptime-text {
@@ -500,8 +556,8 @@
   /* Badge Online */
   .visual-badge {
     position: absolute;
-    top: 175px;
-    right: 10px;
+    top: 168px;
+    right: 0;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -520,8 +576,17 @@
     height: 7px;
     border-radius: 50%;
     background: var(--accent);
-    animation: pulse 2s ease-in-out infinite;
     flex-shrink: 0;
+    position: relative;
+  }
+
+  .badge-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    animation: ring-pulse 2s ease-out infinite;
   }
 
   @keyframes float {
@@ -541,6 +606,17 @@
     }
     50% {
       opacity: 0.4;
+    }
+  }
+
+  @keyframes ring-pulse {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.9;
+    }
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
     }
   }
 
