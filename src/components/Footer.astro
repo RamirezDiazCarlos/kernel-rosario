@@ -11,31 +11,13 @@ const phoneUrl = "tel:+5493412250129";
       <!-- Branding -->
       <div class="footer-brand">
         <div class="footer-logo">
-          <svg
+          <img
+            src="/favicon/favicon-96x96.png"
             width="40"
             height="40"
-            viewBox="0 0 100 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="100" height="100" rx="20" fill="url(#footerGradient)"
-            ></rect>
-            <path
-              d="M30 30h40v10H30z M30 50h40v10H30z M30 70h25v10H30z"
-              fill="currentColor"></path>
-            <defs>
-              <linearGradient
-                id="footerGradient"
-                x1="0"
-                y1="0"
-                x2="100"
-                y2="100"
-              >
-                <stop offset="0%" stop-color="var(--accent)"></stop>
-                <stop offset="100%" stop-color="var(--accent-dim)"></stop>
-              </linearGradient>
-            </defs>
-          </svg>
+            alt=""
+            aria-hidden="true"
+          />
           <span>KERNEL</span>
         </div>
         <p class="footer-tagline">Diseño y desarrollo web profesional para toda Latinoamérica</p>
@@ -135,9 +117,7 @@ const phoneUrl = "tel:+5493412250129";
     color: var(--text-primary);
   }
 
-  .footer-logo svg {
-    color: var(--bg-primary);
-  }
+
 
   .footer-logo span {
     font-family: var(--font-mono);
