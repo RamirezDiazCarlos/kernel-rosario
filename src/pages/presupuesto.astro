@@ -601,9 +601,86 @@ const funcionesOpciones = [
   const submitText = submitBtn?.querySelector(".submit-text") as HTMLElement;
   const errorBox = document.getElementById("form-error") as HTMLElement;
 
+  // Validación visual
+  const camposRequeridos: { name: string; type: "input" | "radio" | "pricing" }[] = [
+    { name: "nombre", type: "input" },
+    { name: "email", type: "input" },
+    { name: "tipoOrientativo", type: "pricing" },
+    { name: "marca", type: "input" },
+    { name: "negocio", type: "input" },
+    { name: "branding", type: "radio" },
+    { name: "objetivo", type: "radio" },
+    { name: "cms", type: "radio" },
+  ];
+
+  function limpiarInvalido(grupo: HTMLElement) {
+    grupo.classList.remove("field-invalid");
+  }
+
+  // Limpiar estado inválido al interactuar
+  camposRequeridos.forEach(({ name, type }) => {
+    if (type === "input") {
+      const el = form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${name}"]`);
+      el?.addEventListener("input", () => {
+        const grupo = el.closest(".form-group") as HTMLElement;
+        if (grupo) limpiarInvalido(grupo);
+      });
+    } else {
+      const radios = form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`);
+      radios.forEach(r => r.addEventListener("change", () => {
+        const grupo = r.closest(".form-group") as HTMLElement;
+        if (grupo) limpiarInvalido(grupo);
+      }));
+    }
+  });
+
+  function validarFormulario(): boolean {
+    let primerInvalido: HTMLElement | null = null;
+
+    // Limpiar todos los estados previos
+    form.querySelectorAll(".field-invalid").forEach(el => el.classList.remove("field-invalid"));
+
+    for (const campo of camposRequeridos) {
+      let valido = false;
+      let grupo: HTMLElement | null = null;
+
+      if (campo.type === "input") {
+        const el = form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${campo.name}"]`);
+        if (el) {
+          valido = el.value.trim() !== "";
+          if (campo.name === "email" && valido) {
+            valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+          }
+          grupo = el.closest(".form-group") as HTMLElement;
+        }
+      } else {
+        const radios = form.querySelectorAll<HTMLInputElement>(`input[name="${campo.name}"]`);
+        valido = Array.from(radios).some(r => r.checked);
+        if (radios.length > 0) {
+          grupo = radios[0].closest(".form-group") as HTMLElement;
+        }
+      }
+
+      if (!valido && grupo) {
+        grupo.classList.add("field-invalid");
+        if (!primerInvalido) primerInvalido = grupo;
+      }
+    }
+
+    if (primerInvalido) {
+      primerInvalido.scrollIntoView({ behavior: "smooth", block: "center" });
+      errorBox.textContent = "Completá los campos marcados para enviar tu consulta.";
+      errorBox.hidden = false;
+    }
+
+    return !primerInvalido;
+  }
+
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
     errorBox.hidden = true;
+
+    if (!validarFormulario()) return;
 
     submitBtn.disabled = true;
     submitText.textContent = "Enviando...";
@@ -1081,6 +1158,33 @@ const funcionesOpciones = [
     background: rgba(45, 232, 144, 0.1);
     border-color: var(--accent);
     color: var(--accent);
+  }
+
+  /* Validación inline */
+  .field-invalid input[type="text"],
+  .field-invalid input[type="email"],
+  .field-invalid input[type="tel"],
+  .field-invalid textarea {
+    border-color: rgba(255, 100, 100, 0.6);
+  }
+
+  .field-invalid .radio-group,
+  .field-invalid .pricing-cards-group {
+    border-radius: var(--radius-md);
+    outline: 1px solid rgba(255, 100, 100, 0.4);
+    outline-offset: 6px;
+  }
+
+  .field-invalid {
+    animation: nudge 0.35s ease;
+  }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-2px); }
+    80% { transform: translateX(2px); }
   }
 
   /* Error */
