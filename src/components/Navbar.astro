@@ -94,7 +94,7 @@
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.5px;
-    transition: color var(--transition);
+    transition: color var(--transition-color);
     position: relative;
   }
 
@@ -133,7 +133,7 @@
     height: 2px;
     background: var(--text-primary);
     position: relative;
-    transition: all var(--transition);
+    transition: background var(--transition);
   }
 
   .hamburger::before,
@@ -144,7 +144,7 @@
     width: 24px;
     height: 2px;
     background: var(--text-primary);
-    transition: all var(--transition);
+    transition: top var(--transition), transform var(--transition), background var(--transition);
   }
 
   .hamburger::before {
@@ -205,7 +205,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity var(--transition), visibility var(--transition);
+      transition: opacity var(--transition-color), visibility var(--transition-color);
     }
 
     .nav-links.open {

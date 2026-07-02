@@ -189,9 +189,11 @@ const proyectos: ReadonlyArray<Proyecto> = [
     flex-direction: column;
   }
 
-  .portfolio-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-4px);
+  @media (hover: hover) and (pointer: fine) {
+    .portfolio-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
   }
 
   .portfolio-image-link {
@@ -268,7 +270,7 @@ const proyectos: ReadonlyArray<Proyecto> = [
     font-size: 13px;
     font-weight: 500;
     text-decoration: none;
-    transition: all var(--transition);
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
   }
 
   .portfolio-link-primary {

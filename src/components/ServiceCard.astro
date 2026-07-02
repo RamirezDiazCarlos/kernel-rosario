@@ -63,7 +63,6 @@ const animationDelay = `${0.1 * (index + 1)}s`;
     border-radius: var(--radius-lg);
     padding: 28px;
     overflow: hidden;
-    transition: all var(--transition);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -141,7 +140,7 @@ const animationDelay = `${0.1 * (index + 1)}s`;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     color: var(--accent);
-    transition: all var(--transition);
+    transition: transform var(--transition), border-color var(--transition);
     flex-shrink: 0;
   }
 

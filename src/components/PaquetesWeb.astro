@@ -220,9 +220,11 @@ const paquetes: ReadonlyArray<Paquete> = [
     transition: border-color var(--transition), transform var(--transition);
   }
 
-  .paquete-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-3px);
+  @media (hover: hover) and (pointer: fine) {
+    .paquete-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
   }
 
   .paquete-card.destacado {
@@ -352,7 +354,7 @@ const paquetes: ReadonlyArray<Paquete> = [
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
-    transition: all var(--transition);
+    transition: background var(--transition), transform var(--transition), border-color var(--transition);
     margin-top: auto;
   }
 
@@ -361,9 +363,11 @@ const paquetes: ReadonlyArray<Paquete> = [
     color: var(--bg-primary);
   }
 
-  .cta-primary:hover {
-    background: var(--accent-dim);
-    transform: translateY(-2px);
+  @media (hover: hover) and (pointer: fine) {
+    .cta-primary:hover {
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+    }
   }
 
   .cta-primary:active {

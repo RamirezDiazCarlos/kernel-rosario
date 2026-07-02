@@ -218,13 +218,15 @@
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    transition: all var(--transition);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   }
 
-  .feature-item:hover {
-    border-color: var(--accent);
-    transform: translateX(8px);
-    box-shadow: var(--shadow-md);
+  @media (hover: hover) and (pointer: fine) {
+    .feature-item:hover {
+      border-color: var(--accent);
+      transform: translateX(8px);
+      box-shadow: var(--shadow-md);
+    }
   }
 
   .feature-icon {
@@ -266,7 +268,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 32px;
-    transition: all var(--transition);
+    transition: transform var(--transition), border-color var(--transition);
     position: relative;
     overflow: hidden;
   }
@@ -287,9 +289,11 @@
     opacity: 1;
   }
 
-  .stat-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .stat-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
   }
 
   .card-1 {

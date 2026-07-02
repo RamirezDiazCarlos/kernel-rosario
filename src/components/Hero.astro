@@ -297,7 +297,7 @@
     font-weight: 600;
     font-size: 15px;
     text-decoration: none;
-    transition: all var(--transition);
+    transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
     cursor: pointer;
     border: 1px solid transparent;
   }
@@ -307,13 +307,16 @@
     color: var(--bg-primary);
   }
 
-  .btn-primary:hover {
-    background: var(--accent-dim);
-    transform: translateY(-2px);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+    }
   }
 
   .btn-primary:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(0) scale(0.97);
+    transition: transform 100ms ease-out;
   }
 
   .btn-secondary {
@@ -345,7 +348,8 @@
   }
 
   .btn-secondary:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(0) scale(0.97);
+    transition: transform 100ms ease-out;
   }
 
   /* Visual derecho */
@@ -373,7 +377,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    animation: float 6s ease-in-out infinite;
+    animation: float 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   }
 
   .speed-label {
@@ -423,7 +427,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    animation: float 7s ease-in-out infinite 1.2s;
+    animation: float 7s cubic-bezier(0.45, 0, 0.55, 1) infinite 1.2s;
   }
 
   .lh-header {
@@ -494,7 +498,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    animation: float 8s ease-in-out infinite 2s;
+    animation: float 8s cubic-bezier(0.45, 0, 0.55, 1) infinite 2s;
   }
 
   .uptime-row {
@@ -568,7 +572,7 @@
     font-size: 12px;
     font-family: var(--font-mono);
     color: var(--accent);
-    animation: float 5s ease-in-out infinite 0.5s;
+    animation: float 5s cubic-bezier(0.45, 0, 0.55, 1) infinite 0.5s;
   }
 
   .badge-pulse {

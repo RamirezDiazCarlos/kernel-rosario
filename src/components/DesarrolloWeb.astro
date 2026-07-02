@@ -251,12 +251,14 @@ const features: ReadonlyArray<Feature> = [
     background: var(--bg-tertiary);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    transition: all var(--transition);
+    transition: border-color var(--transition), transform var(--transition);
   }
 
-  .feature-item:hover {
-    border-color: var(--accent);
-    transform: translateX(4px);
+  @media (hover: hover) and (pointer: fine) {
+    .feature-item:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
   }
 
   .feature-icon {
@@ -341,13 +343,15 @@ const features: ReadonlyArray<Feature> = [
     font-weight: 600;
     font-family: inherit;
     text-decoration: none;
-    transition: all var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition);
     margin-top: 8px;
   }
 
-  .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 40px rgba(45, 232, 144, 0.3);
+  @media (hover: hover) and (pointer: fine) {
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(45, 232, 144, 0.3);
+    }
   }
 
   .cta-button svg {
