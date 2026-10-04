@@ -3,58 +3,75 @@ interface Proyecto {
   readonly nombre: string;
   readonly tipo: string;
   readonly descripcion: string;
-  readonly imagen: string;
+  // Carpeta en public/portfolio/ con imagen.webp y, si tiene video, video.webm + video.mp4
+  readonly carpeta: string;
+  readonly video?: boolean;
   readonly link: string;
   readonly repo?: string;
 }
 
 const proyectos: ReadonlyArray<Proyecto> = [
   {
-    nombre: 'Luz de Arcanos',
-    tipo: 'Web App con IA',
-    descripcion: 'Aplicación de lecturas de tarot generadas por inteligencia artificial. Cada consulta es única, personalizada y entregada en segundos.',
-    imagen: '/portfolio/luzDeArcanos.webp',
-    link: 'https://luzdearcanos.vercel.app/',
-    repo: 'https://github.com/RamirezDiazCarlos/TarotWeb',
-  },
-  {
     nombre: 'Gasistas Rosario',
     tipo: 'Directorio web',
     descripcion: 'Directorio de gasistas matriculados de Rosario: búsqueda por zona, perfil de cada profesional y contacto directo. Conecta vecinos con técnicos habilitados de forma rápida y confiable.',
-    imagen: '/portfolio/gasistas-rosario.webp',
+    carpeta: 'gasistas-rosario',
+    video: true,
     link: 'https://gasistasrosario.com.ar/',
     repo: 'https://github.com/RamirezDiazCarlos/gasistas-rosario',
-  },
-  {
-    nombre: 'Club Atlético Unión de Clarke',
-    tipo: 'Sitio Institucional',
-    descripcion: 'Presencia digital completa para el club: noticias, eventos y toda la información institucional en un solo lugar, siempre disponible para los socios.',
-    imagen: '/portfolio/union-clarke.webp',
-    link: 'https://uniondeclarke.com.ar/',
-  },
-  {
-    nombre: 'DolarActual',
-    tipo: 'Web App',
-    descripcion: 'Herramienta para consultar todas las cotizaciones del dólar en tiempo real. Información actualizada al instante, sin publicidad ni distracciones.',
-    imagen: '/portfolio/dolar-actual.webp',
-    link: 'https://dolaractual.netlify.app/',
-    repo: 'https://github.com/RamirezDiazCarlos/DolarActual',
-  },
-  {
-    nombre: 'Tiempo Construcciones',
-    tipo: 'Landing Page',
-    descripcion: 'Landing page pensada para generar consultas: presentación de servicios, galería de obras y formulario de contacto directo para captar clientes.',
-    imagen: '/portfolio/tiempo-construcciones.webp',
-    link: 'https://tiempoconstrucciones.vercel.app/',
-    repo: 'https://github.com/RamirezDiazCarlos/tiempoconstrucciones',
   },
   {
     nombre: 'Clavos y Alambres Rosario',
     tipo: 'Landing Page',
     descripcion: 'Landing page para distribuidor mayorista de materiales metálicos: alambres, clavos y mallas. Catálogo de productos, galería con modal y contacto vía WhatsApp.',
-    imagen: '/portfolio/c&arosario.webp',
+    carpeta: 'clavos-y-alambres',
+    video: true,
     link: 'https://clavosyalambres.com.ar/',
     repo: 'https://github.com/RamirezDiazCarlos/C-A',
+  },
+  {
+    nombre: 'Tiempo Construcciones',
+    tipo: 'Landing Page',
+    descripcion: 'Landing page pensada para generar consultas: presentación de servicios, galería de obras y formulario de contacto directo para captar clientes.',
+    carpeta: 'tiempo-construcciones',
+    video: true,
+    link: 'https://tiempoconstrucciones.vercel.app/',
+    repo: 'https://github.com/RamirezDiazCarlos/tiempoconstrucciones',
+  },
+  {
+    nombre: 'Club Atlético Unión de Clarke',
+    tipo: 'Sitio Institucional',
+    descripcion: 'Presencia digital completa para el club: noticias, eventos y toda la información institucional en un solo lugar, siempre disponible para los socios.',
+    carpeta: 'union-clarke',
+    video: true,
+    link: 'https://uniondeclarke.com.ar/',
+  },
+  {
+    nombre: 'Instaladores Rosario',
+    tipo: 'Directorio web',
+    descripcion: 'Directorio de técnicos instaladores de aire acondicionado de Rosario: filtro por barrio o servicio, perfil de cada técnico y contacto directo por WhatsApp, sin intermediarios.',
+    carpeta: 'instaladores-rosario',
+    video: true,
+    link: 'https://instaladoresrosario.com.ar/',
+    repo: 'https://github.com/RamirezDiazCarlos/instaladoresRosario',
+  },
+  {
+    nombre: 'DolarActual',
+    tipo: 'Web App',
+    descripcion: 'Herramienta para consultar todas las cotizaciones del dólar en tiempo real. Información actualizada al instante, sin publicidad ni distracciones.',
+    carpeta: 'dolar-actual',
+    video: true,
+    link: 'https://dolaractual.netlify.app/',
+    repo: 'https://github.com/RamirezDiazCarlos/DolarActual',
+  },
+  {
+    nombre: 'Luz de Arcanos',
+    tipo: 'Web App con IA',
+    descripcion: 'Aplicación de lecturas de tarot generadas por inteligencia artificial. Cada consulta es única, personalizada y entregada en segundos.',
+    carpeta: 'luz-de-arcanos',
+    video: true,
+    link: 'https://luzdearcanos.vercel.app/',
+    repo: 'https://github.com/RamirezDiazCarlos/TarotWeb',
   },
 ];
 ---
@@ -83,14 +100,31 @@ const proyectos: ReadonlyArray<Proyecto> = [
             aria-label={`Ver ${proyecto.nombre}`}
           >
             <div class="portfolio-image-wrapper">
-              <img
-                src={proyecto.imagen}
-                alt={`${proyecto.tipo} — ${proyecto.nombre}`}
-                width="800"
-                height="500"
-                loading="lazy"
-                class="portfolio-image"
-              />
+              {proyecto.video ? (
+                <video
+                  class="portfolio-image portfolio-video"
+                  poster={`/portfolio/${proyecto.carpeta}/imagen.webp`}
+                  width="1280"
+                  height="800"
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  aria-label={`Recorrido por el sitio de ${proyecto.nombre}`}
+                >
+                  <source src={`/portfolio/${proyecto.carpeta}/video.webm`} type="video/webm" />
+                  <source src={`/portfolio/${proyecto.carpeta}/video.mp4`} type="video/mp4" />
+                </video>
+              ) : (
+                <img
+                  src={`/portfolio/${proyecto.carpeta}/imagen.webp`}
+                  alt={`${proyecto.tipo} — ${proyecto.nombre}`}
+                  width="800"
+                  height="500"
+                  loading="lazy"
+                  class="portfolio-image"
+                />
+              )}
             </div>
           </a>
           <div class="portfolio-content">
@@ -130,6 +164,51 @@ const proyectos: ReadonlyArray<Proyecto> = [
     </div>
   </div>
 </section>
+
+<script>
+  // Con mouse: el video se reproduce al pasar sobre la tarjeta y vuelve al inicio al salir.
+  // En pantallas táctiles (sin hover): se reproduce mientras está en pantalla.
+  // Con "reducir movimiento" activado queda el poster fijo.
+  const videos = document.querySelectorAll<HTMLVideoElement>(".portfolio-video");
+  const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const tieneHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (videos.length && !reducirMovimiento && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (tieneHover) {
+            // Precarga al acercarse, así el hover arranca sin demora
+            if (entry.isIntersecting) {
+              video.preload = "auto";
+              observer.unobserve(video);
+            }
+          } else if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: tieneHover ? 0 : 0.35, rootMargin: tieneHover ? "200px 0px" : "0px" }
+    );
+
+    videos.forEach((video) => {
+      observer.observe(video);
+      if (!tieneHover) return;
+
+      const card = video.closest(".portfolio-card");
+      card?.addEventListener("mouseenter", () => {
+        video.play().catch(() => {});
+      });
+      card?.addEventListener("mouseleave", () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+    });
+  }
+</script>
 
 <style>
   .portfolio-section {

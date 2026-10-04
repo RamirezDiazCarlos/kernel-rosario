@@ -48,6 +48,12 @@ const funcionesOpciones = [
 
         <form id="form-presupuesto" class="presupuesto-form" novalidate>
 
+          <!-- Honeypot anti-spam: invisible para personas, los bots lo completan -->
+          <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+            <label for="website">No completar este campo</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
           <!-- CONTACTO -->
           <div class="form-section form-section--inicio animate-on-scroll">
             <div class="form-section-label">Contacto</div>

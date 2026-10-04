@@ -5,12 +5,43 @@ export const prerender = false;
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
+// Remitente: usar un dominio verificado en Resend (ej. "Formulario Kernel <no-reply@tudominio>")
+const FROM = import.meta.env.RESEND_FROM ?? "Formulario Kernel <onboarding@resend.dev>";
+
+const MAX_LENGTH = 5000;
+
+// Rate limit simple por IP (en memoria, por instancia serverless: es best-effort)
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = 3;
+const envios = new Map<string, number[]>();
+
+function excedeRateLimit(ip: string): boolean {
+  const ahora = Date.now();
+  const recientes = (envios.get(ip) ?? []).filter(t => ahora - t < RATE_LIMIT_WINDOW_MS);
+  if (recientes.length >= RATE_LIMIT_MAX) {
+    envios.set(ip, recientes);
+    return true;
+  }
+  recientes.push(ahora);
+  envios.set(ip, recientes);
+  return false;
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function row(label: string, value: string | undefined) {
   if (!value) return "";
   return `
     <tr>
       <td style="padding:10px 0;border-bottom:1px solid #eee;font-weight:600;width:200px;vertical-align:top;color:#444;">${label}</td>
-      <td style="padding:10px 0;border-bottom:1px solid #eee;color:#222;white-space:pre-wrap;">${value}</td>
+      <td style="padding:10px 0;border-bottom:1px solid #eee;color:#222;white-space:pre-wrap;">${escapeHtml(value)}</td>
     </tr>`;
 }
 
@@ -20,8 +51,30 @@ function section(title: string, content: string) {
     <table style="width:100%;border-collapse:collapse;">${content}</table>`;
 }
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, clientAddress }) => {
   const data = await request.formData();
+
+  // Honeypot: si viene completo es un bot. Respondemos OK para no darle pistas.
+  if (data.get("website")?.toString().trim()) {
+    return new Response(JSON.stringify({ ok: true }), { status: 200 });
+  }
+
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || clientAddress;
+  if (ip && excedeRateLimit(ip)) {
+    return new Response(
+      JSON.stringify({ error: "Demasiados envíos. Probá de nuevo en unos minutos." }),
+      { status: 429 }
+    );
+  }
+
+  for (const value of data.values()) {
+    if (typeof value === "string" && value.length > MAX_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: "Alguno de los campos es demasiado largo." }),
+        { status: 400 }
+      );
+    }
+  }
 
   const nombre = data.get("nombre")?.toString().trim() ?? "";
   const email = data.get("email")?.toString().trim() ?? "";
@@ -62,7 +115,7 @@ export const POST: APIRoute = async ({ request }) => {
     <div style="font-family:sans-serif;max-width:680px;margin:0 auto;color:#222;">
       <div style="background:#0a0a0a;padding:32px;border-radius:12px 12px 0 0;">
         <h1 style="color:#00ff88;margin:0;font-size:20px;">Nueva solicitud de presupuesto web</h1>
-        <p style="color:#999;margin:8px 0 0;font-size:13px;">${nombre} · ${marca} · ${tipo}</p>
+        <p style="color:#999;margin:8px 0 0;font-size:13px;">${escapeHtml(nombre)} · ${escapeHtml(marca)} · ${escapeHtml(tipo)}</p>
       </div>
       <div style="background:#f9f9f9;padding:32px;border-radius:0 0 12px 12px;">
 
@@ -104,8 +157,8 @@ export const POST: APIRoute = async ({ request }) => {
         )}
 
         <div style="margin-top:32px;">
-          <a href="mailto:${email}" style="background:#00ff88;color:#0a0a0a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;">
-            Responder a ${nombre}
+          <a href="mailto:${escapeHtml(email)}" style="background:#00ff88;color:#0a0a0a;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;">
+            Responder a ${escapeHtml(nombre)}
           </a>
         </div>
       </div>
@@ -113,7 +166,7 @@ export const POST: APIRoute = async ({ request }) => {
   `;
 
   const { error } = await resend.emails.send({
-    from: "Formulario Kernel <onboarding@resend.dev>",
+    from: FROM,
     to: "cramirezdiaz.dev@gmail.com",
     replyTo: email,
     subject: `Presupuesto web: ${marca} (${tipo})`,

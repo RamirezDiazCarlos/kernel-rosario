@@ -25,3 +25,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Videos originales sin comprimir del portfolio (solo locales)
+public/portfolio/*/original.*
